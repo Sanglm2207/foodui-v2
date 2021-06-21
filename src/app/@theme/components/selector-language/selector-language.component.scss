@@ -1,0 +1,11 @@
+.selector-language{
+  .dropdown-menu{
+    min-width: max-content;
+    .ng-star-inserted{
+      transition: all 0.3s;
+      &:hover{
+        background-color: #EEEEEE;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" style="font-size: medium">Xóa</h4>
+  <button type="button" class="btn shadow-none p-0" aria-label="Close" (click)="close()">
+    <span aria-hidden="true" style="font-size: large">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>{{'message.delete' | translate}}</p>
+</div>
+<div class="modal-footer pr-5">
+  <button type="button" class="btn btn-info mr-4" (click)="close()">{{'title.button.cancel' | translate}}</button>
+  <button type="button" class="btn btn-danger" (click)="processDelete()">{{'title.button.delete' | translate}}</button>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box">
+  <p style="font-size: 20px; color: white">{{'title.loading' | translate}}</p>
+</ngx-spinner>

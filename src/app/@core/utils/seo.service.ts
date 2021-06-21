@@ -1,9 +1,9 @@
-import { Injectable, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
-import { NB_DOCUMENT } from '@nebular/theme';
-import { filter, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {Injectable, Inject, PLATFORM_ID, OnDestroy} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import {NavigationEnd, Router} from '@angular/router';
+import {NB_DOCUMENT} from '@nebular/theme';
+import {filter, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class SeoService implements OnDestroy {
@@ -44,7 +44,7 @@ export class SeoService implements OnDestroy {
     }
 
     this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd),
+      filter((evt) => event instanceof NavigationEnd),
       takeUntil(this.destroy$),
     )
       .subscribe(() => {

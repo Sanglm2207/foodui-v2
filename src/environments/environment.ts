@@ -10,4 +10,8 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:2021/api/',
+  serverUrl: {
+     baseUrl: 'http://localhost:2021/api/',
+  },
 };

@@ -1,0 +1,127 @@
+<kt-portlet>
+  <kt-portlet-header [icon]="'pi pi-search'"
+                     [title]="'title.search' | translate ">
+  </kt-portlet-header>
+  <kt-portlet-body>
+    <form [formGroup]="formSearch">
+      <div class="p-fluid p-grid">
+        <div class="p-md-4" style="padding: 1rem 0.5rem  !important;">
+              <span class="p-float-label">
+                <input id="customerName"
+                       type="text"
+                       class="form-control"
+                       formControlName="customerName"
+                       pInputText>
+                <label for="customerName">{{'title.customer.name' | translate}}</label>
+              </span>
+        </div>
+      </div>
+    </form>
+    <button type="button"
+            (click)="processSearch()"
+            class="btn btn-info">{{'title.button.search' | translate}}</button>
+  </kt-portlet-body>
+</kt-portlet>
+
+<kt-portlet>
+  <kt-portlet-header [icon]="'pi pi-align-justify'"
+                     [class]="'d-flex flex-row'"
+                     [title]="'title.order.list' | translate ">
+    <ng-container ktPortletTools>
+      <button class="btn btn-success" (click)="processSave()"
+              tooltipPosition="bottom"
+              pTooltip="{{'title.button.new' | translate}}">
+        <i class="pi pi-plus"></i>
+      </button>
+      <!--          <button class="btn btn-danger ml-2" (click)="processDelete()"-->
+      <!--                  pTooltip="{{'title.button.delete' | translate}}"-->
+      <!--                  tooltipPosition="bottom"-->
+      <!--                  [disabled]="lstDel.length === 0">-->
+      <!--            <i class="pi pi-trash"></i>-->
+      <!--          </button>-->
+    </ng-container>
+  </kt-portlet-header>
+  <kt-portlet-body>
+    <p-table #ptable [value]="listOrder"
+             [paginator]="listOrder.length"
+             [rows]="5"
+             [totalRecords]="total"
+             (onLazyLoad)="processSearch($event)"
+             dataKey="id"
+             [lazy]="true"
+             styleClass="p-datatable-gridlines">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <!--          <col class="size-1">-->
+          <col class="size-1">
+          <col class="size-1">
+          <col class="size-1">
+          <col class="size-3">
+          <col class="size-2">
+          <col class="size-2">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">
+            {{'title.table.index' | translate}}
+          </th>
+          <th class="text-center">
+            {{'title.action' | translate}}
+          </th>
+          <th class="text-center">
+            {{'title.detail' | translate}}
+          </th>
+          <!--          <th class="text-center">-->
+          <!--            {{'title.order.code' | translate}}-->
+          <!--          </th>-->
+          <th class="text-center">
+            {{'title.customer.name' | translate}}
+          </th>
+          <th class="text-center">
+            {{'title.order.total' | translate}}
+          </th>
+          <th class="text-center">
+            {{'title.order.createdDate' | translate}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body"
+                   let-item let-index="rowIndex+1">
+        <tr>
+          <td class="text-center">{{index}}</td>
+          <td class="text-center">
+            <i class="pi pi-trash text-danger p-ml-3 cursor-pointer"
+               (click)="processDelete(item.id)"
+               pTooltip="{{'title.button.delete' | translate}}">
+            </i>
+          </td>
+          <td class="text-center">
+            <i class="pi pi-pencil text-primary p-ml-3 cursor-pointer"
+               [routerLink]="['./detail',item.guid]"
+               pTooltip="{{'title.button.detail' | translate}}">
+            </i>
+          </td>
+          <td class="text-center">{{item.customerName}}</td>
+          <td class="text-center">{{item.total}}</td>
+          <td class="text-center">{{item.dateOrder | date:'dd/MM/yyyy'}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr class="empty_message">
+          <td [attr.colspan]="5" [innerHTML]="'message.noRecords' | translate">
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft" let-state>
+      </ng-template>
+    </p-table>
+  </kt-portlet-body>
+</kt-portlet>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box">
+  <p style="font-size: 20px; color: white">{{'title.loading' | translate}}</p>
+</ngx-spinner>

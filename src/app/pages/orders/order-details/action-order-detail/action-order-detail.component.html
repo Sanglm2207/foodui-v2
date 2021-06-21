@@ -1,0 +1,91 @@
+<div class="modal-header">
+  <h4 class="modal-title"
+      style="font-size: medium">
+    {{'title.product.add'|translate}}
+  </h4>
+  <button type="button" class="btn shadow-none p-0" aria-label="Close" (click)="close()">
+    <span aria-hidden="true" style="font-size: large">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="p-fluid p-grid">
+      <div class="p-md-6" style="padding: 1rem 0.5rem  !important;">
+              <span class="p-float-label">
+                <p-dropdown
+                  id="guidProduct"
+                  formControlName="guidProduct"
+                  [styleClass]="'p-dropdown-custom'"
+                  [ngClass]="isSubmitted && f['guidProduct'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                  [autoDisplayFirst]="false"
+                  (onChange)="selectProduct($event)"
+                  [options]="lstProducts"
+                  [optionValue]="'guid'"
+                  optionLabel="productName">
+                </p-dropdown>
+                <label for="guidProduct" class="required">{{'title.product.name' | translate}}</label>
+              </span>
+        <small *ngIf="isSubmitted && f['guidProduct'].errors?.required"
+               class="p-error text-error p-pl-1">
+          {{'title.product.name.required' | translate}}
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="price"
+                       type="text"
+                       formControlName="price"
+                       class="form-control"
+                       [attr.disabled]="true"
+                       pInputText>
+                <label for="price"> {{'title.price' | translate}}</label>
+              </span>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="quantity"
+                       type="number"
+                       min = 0
+                       (blur)="getQuantity($event)"
+                       formControlName="quantity"
+                       [ngClass]="isSubmitted && f['quantity'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                       class="form-control"
+                       pInputText>
+                <label for="quantity" class="required">{{'title.quantity' | translate}}</label>
+              </span>
+        <small *ngIf="isSubmitted && f['quantity'].errors?.required"
+               class="p-error text-error p-pl-1">
+          {{'title.quantity.required' | translate}}
+        </small>
+        <small *ngIf="!check"
+               class="p-error text-error p-pl-1">
+          {{'title.quantity.than' | translate}}
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="quantityProduct"
+                       type="number"
+                       formControlName="quantityProduct"
+                       class="form-control"
+                       [attr.disabled]="true"
+                       pInputText>
+                <label for="quantityProduct">{{'quantity' | translate}}</label>
+              </span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer pr-5">
+  <button type="button" class="btn btn-info mr-4" (click)="close()">{{'title.button.cancel' | translate}}</button>
+  <button type="button" class="btn btn-danger"
+          (click)="processSaveOrUpdate()">{{'title.button.save' | translate}}</button>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box">
+  <p style="font-size: 20px; color: white">{{'title.loading' | translate}}</p>
+</ngx-spinner>

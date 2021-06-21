@@ -1,0 +1,162 @@
+<script src="../delete-product/delete-product.component.ts"></script>
+<script src="../../city/action-city/action-city.component.ts"></script>
+<div class="modal-header">
+  <h4 *ngIf="action" class="modal-title"
+      style="font-size: medium">
+    {{'Thêm mới sản phẩm'}}
+  </h4>
+  <h4 *ngIf="!action" class="modal-title"
+      style="font-size: medium">
+    {{'Sửa'}}
+
+  </h4>
+  <button type="button" class="btn shadow-none p-0" aria-label="Close" (click)="close()">
+    <span aria-hidden="true" style="font-size: large">x</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="p-fluid p-grid">
+      <div class="p-md-6" style="padding: 1rem 0.5rem  !important;">
+              <span class="p-float-label">
+                <input id="name"
+                       type="text"
+                       formControlName="productName"
+                       [ngClass]="isSubmitted && f['productName'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                       class="form-control"
+                       pInputText>
+                <label for="name" class="required">Tên sản phẩm</label>
+              </span>
+        <!--        <span class="p-float-label">-->
+        <!--            <input type="text" id="inputtext" pInputText >-->
+        <!--            <label for="inputtext">InputText</label>-->
+        <!--        </span>-->
+        <small *ngIf="isSubmitted && f['productName'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Tên sản phẩm là bắt buộc !
+        </small>
+      </div>
+<!--      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">-->
+<!--        <span class="p-float-label p-input-icon-right">-->
+<!--          <i class="pi pi-calendar text-primary"></i>-->
+<!--          <p-calendar id="createdDate"-->
+<!--                      formControlName="createdDate"-->
+<!--                      [ngClass]="isSubmitted && f['createdDate'].errors?.required ? 'ng-dirty ng-invalid': ''"-->
+<!--                      styleClass="p-dropdown-custom">-->
+<!--          </p-calendar>-->
+<!--        <label for="createdDate" class="required">Thời gian</label>-->
+<!--              </span>-->
+<!--        <small *ngIf="isSubmitted && f['createdDate'].errors?.required"-->
+<!--               class="p-error text-error p-pl-1">-->
+<!--          Thời gian là bắt buộc !-->
+<!--        </small>-->
+<!--      </div>-->
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="size"
+                       type="text"
+                       formControlName="size"
+                       [ngClass]="isSubmitted && f['size'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                       class="form-control"
+                       pInputText>
+                <label for="size" class="required">Kích cỡ </label>
+              </span>
+        <small *ngIf="isSubmitted && f['size'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Kích cỡ là bắt buộc !
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="weight"
+                       type="number"
+                       formControlName="weight"
+                       [ngClass]="isSubmitted && f['weight'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                       class="form-control"
+                       pInputText>
+                <label for="weight" class="required">Khối lượng </label>
+              </span>
+        <small *ngIf="isSubmitted && f['weight'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Khối lượng là bắt buộc !
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="price"
+                       type="number"
+                       formControlName="price"
+                       [ngClass]="isSubmitted && f['price'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                       class="form-control"
+                       pInputText>
+                <label for="price" class="required">Giá </label>
+              </span>
+        <small *ngIf="isSubmitted && f['price'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Giá sản phẩm là bắt buộc !
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label p-input-icon-right">
+<!--                <i [hidden]="isLoadCategory" class="pi pi-spin pi-spinner"></i>-->
+                <p-dropdown
+                  id="store"
+                  formControlName="guidStore"
+                  [styleClass]="'p-dropdown-custom'"
+                  [ngClass]="isSubmitted && f['guidStore'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                  [autoDisplayFirst]="false"
+                  [options]="lstStore"
+                  optionValue="guid"
+                  optionLabel="nameStore">
+                </p-dropdown>
+                <label for="store" class="required">{{'Tên cửa hàng' }}</label>
+              </span>
+        <small *ngIf="isSubmitted && f['guidStore'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Tên cửa hàng là bắt buộc !
+        </small>
+      </div>
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+      <span class="p-float-label">
+      <input id="quantity"
+             type="number"
+             formControlName="quantity"
+             [ngClass]="isSubmitted && f['quantity'].errors?.required ? 'ng-dirty ng-invalid': ''"
+             class="form-control"
+             pInputText>
+                <label for="quantity" class="required">Số lượng</label>
+              </span>
+        <small *ngIf="isSubmitted && f['quantity'].errors?.required"
+               class="p-error text-error p-pl-1">
+          Số lượng là bắt buộc !
+        </small>
+      </div>
+
+      <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+              <span class="p-float-label">
+                <input id="description"
+                       type="text"
+                       class="form-control"
+                       formControlName="description"
+                       pInputText>
+                <label for="description">Thông tin sản phẩm</label>
+              </span>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer pr-5">
+  <button type="button" class="btn btn-info mr-4" (click)="close()">Close</button>
+  <button type="button" class="btn btn-danger"
+          (click)="processSaveOrUpdate()">Save
+  </button>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h4 *ngIf="action" class="modal-title"
+      style="font-size: medium">
+    {{'title.order.add'|translate}}
+  </h4>
+  <h4 *ngIf="!action" class="modal-title"
+      style="font-size: medium">
+    {{'title.order.edit'|translate}}
+  </h4>
+  <button type="button" class="btn shadow-none p-0" aria-label="Close" (click)="close()">
+    <span aria-hidden="true" style="font-size: large">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="p-fluid p-grid">
+      <div class="p-md-12" style="padding: 1rem 0.5rem  !important;">
+              <span class="p-float-label">
+                <p-dropdown
+                  id="guidCustomer"
+                  formControlName="guidCustomer"
+                  [styleClass]="'p-dropdown-custom'"
+                  [ngClass]="isSubmitted && f['guidCustomer'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                  [autoDisplayFirst]="false"
+                  [options]="lstCustomer"
+                  [optionValue]="'guid'"
+                  optionLabel="customerName">
+                </p-dropdown>
+                <label for="guidCustomer" class="required">{{'title.customer.name' | translate}}</label>
+              </span>
+        <small *ngIf="isSubmitted && f['guidCustomer'].errors?.required"
+               class="p-error text-error p-pl-1">
+          {{'title.customer.name.required' | translate}}
+        </small>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer pr-5">
+  <button type="button" class="btn btn-info mr-4" (click)="close()">{{'title.button.cancel' | translate}}</button>
+  <button type="button" class="btn btn-danger"
+          (click)="processSaveOrUpdate()">{{'title.button.save' | translate}}</button>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box">
+  <p style="font-size: 20px; color: white">{{'title.loading' | translate}}</p>
+</ngx-spinner>

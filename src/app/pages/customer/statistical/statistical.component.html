@@ -1,0 +1,33 @@
+<kt-portlet>
+  <kt-portlet-header [title]="'title.customer.statistical' | translate ">
+    <ng-container ktPortletIcon>
+      <button class="btn"
+              routerLink="/pages/customer"
+              style="background: transparent !important;">
+        <i class="pi pi-arrow-left"></i>
+      </button>
+    </ng-container>
+  </kt-portlet-header>
+  <kt-portlet-body>
+    <div class="box">
+      <h6 class="p-mr-1">{{'title.customer.name' | translate}}</h6>
+      <span *ngIf="data != null || data != undefined"> {{data.customerName}}</span>
+    </div>
+    <div class="box">
+      <h6 class="p-mr-1">{{'title.city.name' | translate}}</h6>
+      <span *ngIf="data != null || data != undefined"> {{data.cityName}}</span>
+    </div>
+    <div class="box">
+      <h6 class="p-mr-1">{{'title.city.department.name' | translate}}</h6>
+      <span *ngIf="data != null || data != undefined"> {{data.nameDepartment}}</span>
+    </div>
+    <div class="box">
+      <h6 class="p-mr-1">{{'title.total' | translate}}</h6>
+      <span *ngIf="data != null || data != undefined"> {{data.total}}</span>
+    </div>
+    <div class="box">
+      <h6 class="p-mr-1">{{'title.order.count' | translate}}</h6>
+      <span *ngIf="data != null || data != undefined"> {{data.count}}</span>
+    </div>
+  </kt-portlet-body>
+</kt-portlet>

@@ -1,6 +1,6 @@
 import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Contacts, RecentUsers, UserData } from '../data/users';
+import {Contacts, RecentUsers, UserData} from '../utils/user';
 
 @Injectable()
 export class UserService extends UserData {

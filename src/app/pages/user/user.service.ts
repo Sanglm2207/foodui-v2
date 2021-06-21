@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { AppSettings } from '../../app.setting';
 
 
-const API_URL =  AppSettings.BASE_URL + 'user/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,13 +17,15 @@ const httpOptions = {
 })
 export class UserService {
 
+  private readonly baseUrl = `${environment.apiUrl}user/`;
+  
   constructor(private http: HttpClient) { }
 
   getListUser(): Observable<any> {
-    return this.http.get<any>(API_URL + 'getAllUser', httpOptions);
+    return this.http.get<any>(this.baseUrl + 'getAllUser', httpOptions);
   }
 
   deleteUser(id: number): Observable<any[]> {
-    return this.http.delete<any>(API_URL + 'deleteAccount/' + id, httpOptions)
+    return this.http.delete<any>(this.baseUrl + 'deleteAccount/' + id, httpOptions)
   }
 }

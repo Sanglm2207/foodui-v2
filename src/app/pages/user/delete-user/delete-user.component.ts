@@ -3,7 +3,6 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import {ProductService} from '../../../@core/services/_service/product.service';
 
 @Component({
   selector: 'ngx-delete-user',
@@ -18,7 +17,6 @@ export class DeleteUserComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private service: ProductService,
   ) {
   }
 
@@ -26,16 +24,16 @@ export class DeleteUserComponent implements OnInit {
   }
 
   processDelete() {
-    this.spinner.show();
-    this.service.deleteById(this.idProduct).subscribe(res => {
-      this.spinner.hide();
-      if (res.code === 'success') {
-        this.modal.close('success');
-        this.toastr.success('success');
-      } else {
-        this.toastr.error('fail');
-      }
-    });
+    // this.spinner.show();
+    // this.service.deleteById(this.idProduct).subscribe(res => {
+    //   this.spinner.hide();
+    //   if (res.code === 'success') {
+    //     this.modal.close('success');
+    //     this.toastr.success('success');
+    //   } else {
+    //     this.toastr.error('fail');
+    //   }
+    // });
   }
 
   close() {

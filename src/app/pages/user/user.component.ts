@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProductService } from '../../@core/services/_service/product.service';
 import { User } from '../../@core/_config/_models/user';
 import { UserService } from './user.service';
 

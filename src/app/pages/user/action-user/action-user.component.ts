@@ -4,9 +4,6 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {TranslateService} from '@ngx-translate/core';
-import {CityService} from '../../../@core/services/_service/city.service';
-import {ProductService} from '../../../@core/services/_service/product.service';
-import {StoreService} from '../../../@core/services/_service/store.service';
 
 @Component({
   selector: 'ngx-action-user',
@@ -28,8 +25,6 @@ export class ActionUserComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private translate: TranslateService,
-    private service: ProductService,
-    private storeService: StoreService,
   ) {
   }
 
@@ -73,25 +68,25 @@ export class ActionUserComponent implements OnInit {
   }
 
   findAll() {
-    this.storeService.findAllData().subscribe(res => {
-      this.lstStore = res.data;
-    });
+    // this.storeService.findAllData().subscribe(res => {
+    //   this.lstStore = res.data;
+    // });
   }
 
   processSaveOrUpdate() {
-    this.isSubmitted = true;
-    if (this.form.valid) {
-      this.spinner.show();
-      this.service.saveOrUpdate(this.form.value).subscribe(res => {
-        this.spinner.hide();
-        if (res.code === 'success') {
-          this.modal.close('success');
-          this.toastr.success('success');
-        } else {
-          this.toastr.error('error');
-        }
-      });
-    }
+    // this.isSubmitted = true;
+    // if (this.form.valid) {
+    //   this.spinner.show();
+    //   this.service.saveOrUpdate(this.form.value).subscribe(res => {
+    //     this.spinner.hide();
+    //     if (res.code === 'success') {
+    //       this.modal.close('success');
+    //       this.toastr.success('success');
+    //     } else {
+    //       this.toastr.error('error');
+    //     }
+    //   });
+    // }
   }
 }
 

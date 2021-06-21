@@ -1,140 +1,114 @@
 <p-toast></p-toast>
 
 <kt-portlet>
-  <kt-portlet-header
-    [icon]="'pi pi-align-justify'"
-    [class]="'d-flex flex-row'"
-    [title]="'title.user.listUser' | translate"
-  >
-    <ng-container ktPortletTools>
-      <button
-        class="btn btn-success"
-        tooltipPosition="bottom"
-        pTooltip="{{ 'Thêm' }}"
-      >
-        <i class="pi pi-plus"></i>
-      </button>
-    </ng-container>
+  <kt-portlet-header [icon]="'pi pi-align-justify'" [class]="'d-flex flex-row'" [title]="'title.user.listUser' | translate">
   </kt-portlet-header>
   <kt-portlet-body>
-    <p-toast></p-toast>
 
 <div class="card">
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-            <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteselectedUsers()" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+            
         </ng-template>
 
         <ng-template pTemplate="right">
-            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
-            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" ></button>
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="users" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','birthday', 'phoneNumber' , 'address', 'status']"
-        [(selection)]="selectedUsers" [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                <h5 class="p-m-0">Manage users</h5>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-                </span>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 3rem">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
-                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
-                <th pSortableColumn="birthday">Birthday <p-sortIcon field="birthday"></p-sortIcon></th>
-                <th pSortableColumn="phoneNumber">Phone <p-sortIcon field="phoneNumber"></p-sortIcon></th>
-                <th pSortableColumn="address">Addess <p-sortIcon field="address"></p-sortIcon></th>
-                <th pSortableColumn="status">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
-                <th></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-            <tr>
-                <td>
-                    <p-tableCheckbox [value]="user"></p-tableCheckbox>
-                </td>
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.birthday}}</td>
-                <td>{{user.phoneNumber}}</td>
-                <td>{{user.address}}</td>
-                <td><span [class]="'user-badge status-' + user.status.toLowerCase()">{{user.status}}</span></td>
-                <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edituser(user)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteuser(user)"></button>
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="summary">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                In total there are {{users ? users.length : 0 }} users.
-            </div>
-        </ng-template>
-    </p-table>
+<ngx-datatable
+        #table
+        style="height: 220px"
+        class="material expandable"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [scrollbarV]="true"
+        [rows]="rows"
+        [columns]="columns"
+        (page)="onPage($event)"
+      >
+       <ngx-datatable-column name="ID">
+          <ng-template
+            ngx-datatable-cell-template
+            let-rowIndex="rowIndex"
+            let-row="row"
+          >
+            {{ rowIndex }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Username" prop="username">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Fullname" prop="name">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone" prop="phoneNumber">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Email" prop="email">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Address" prop="address">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Vai trò" prop="status">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            <mat-chip-list>
+              <mat-chip color="primary" *ngIf="value === true"
+                >Nhân viên</mat-chip
+              >
+              <mat-chip color="accent" *ngIf="value === false"
+                >Quản lý</mat-chip
+              >
+            </mat-chip-list>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action">
+          <ng-template ngx-datatable-cell-template>
+            <button mat-icon-button color="primary" (click)="edit()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteUser()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+
+          <ngx-datatable-footer>
+            <ng-template
+              ngx-datatable-footer-template
+              let-rowCount="rowCount"
+              let-pageSize="pageSize"
+              let-selectedCount="selectedCount"
+              let-curPage="curPage"
+              let-offset="offset"
+            >
+              <div style="padding: 5px 10px">
+                <div>
+                  Rows: {{ rowCount }} | Size: {{ pageSize }} | Current:
+                  {{ curPage }} | Offset: {{ offset }}
+                </div>
+              </div>
+            </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
 </div>
-
-<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="user Details" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="p-field">
-            <label for="name">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !user.name">Name is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="description">Description</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="user.description" required rows="3" cols="20"></textarea>
-        </div>
-
-        <div class="p-field">
-            <label class="p-mb-3">Category</label>
-            <div class="p-formgrid p-grid">
-                <div class="p-field-radiobutton p-col-6">
-                    <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="user.category"></p-radioButton>
-                    <label for="category1">Accessories</label>
-                </div>
-                <div class="p-field-radiobutton p-col-6">
-                    <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="user.category"></p-radioButton>
-                    <label for="category2">Clothing</label>
-                </div>
-                <div class="p-field-radiobutton p-col-6">
-                    <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="user.category"></p-radioButton>
-                    <label for="category3">Electronics</label>
-                </div>
-                <div class="p-field-radiobutton p-col-6">
-                    <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="user.category"></p-radioButton>
-                    <label for="category4">Fitness</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="price">Price</label>
-                <p-inputNumber id="price" [(ngModel)]="user.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-            </div>
-            <div class="p-field p-col">
-                <label for="quantity">Quantity</label>
-                <p-inputNumber id="quantity" [(ngModel)]="user.quantity"></p-inputNumber>
-            </div>
-        </div>
-    </ng-template>
-    
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveuser()"></button>
-    </ng-template>
-</p-dialog>
-
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-  </kt-portlet-body>
-</kt-portlet>

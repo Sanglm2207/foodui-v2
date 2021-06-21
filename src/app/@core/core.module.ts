@@ -13,6 +13,7 @@ import {AnalyticsService} from './utils/analytics.service';
 import {LayoutService} from './utils/layout.service';
 import {SeoService} from './utils/seo.service';
 import {StateService} from './utils/state.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const socialLinks = [
   {

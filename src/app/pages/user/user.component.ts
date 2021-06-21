@@ -1,165 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { User } from '../../@core/_config/_models/user';
 import { UserService } from './user.service';
+import {Page} from '../../shares/models/page';
+import {DatatableComponent, ColumnMode} from '@swimlane/ngx-datatable';
+
+class PagedData<T> {
+  data: T[];
+}
 
 @Component({
   selector: 'ngx-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
 
-  userDialog: boolean;
+  page = new Page();
+  loadingIndicator = true;
+  reorderable = true;
+  rows = [];
+  expanded: any = {};
+  timeout: any;
 
-  users: User[];
 
-  user: User;
+  columns = [
+    { name: 'No', prop: 'no' },
+    { name: 'Username', prop: 'username' },
+    { name: 'Fullname', prop: 'name' },
+    { name: 'Phone', prop: 'phoneNumber' },
+    { name: 'Email', prop: 'email' },
+    { name: 'Address', prop: 'address' },
+    { name: 'Vai trò', prop: 'status' },
+    { name: 'Action', prop: 'action' },
+  ];
+  @ViewChild(DatatableComponent) table: DatatableComponent;
 
-  selectedUsers: User[];
+  ColumnMode = ColumnMode;
 
-  submitted: boolean;
-
-  statuses: any[];
-
-  
-  constructor(private modal: NgbModal,
-              private fb: FormBuilder,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private spinner: NgxSpinnerService,
-              private messageService: MessageService, 
-              private confirmationService: ConfirmationService) { }
+              private el: ElementRef) {
+              }
 
   ngOnInit(): void {
-    this.getListUser();
+    this.getAllUsers();
   }
 
-  
+  onPage(event) {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      console.log('paged!', event);
+    }, 100);
+  }
 
-  getListUser() {
-    this.userService.getListUser().subscribe(res => {
-      this.users = res.data;
+  public getAllUsers(): void {
+    this.userService.getListUser().subscribe(data => {
+      this.rows = data as string[];
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 1500);
+    }, error => {
+      console.log(error);
     });
   }
 
-  openNew() {
-    this.user = {};
-    this.submitted = false;
-    this.userDialog = true;
-}
 
-deleteSelectedUsers() {
-  this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected users?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          this.users = this.users.filter(val => !this.selectedUsers.includes(val));
-          this.selectedUsers = null;
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Users Deleted', life: 3000});
-      }
-  });
-}
-
-editUser(user: User) {
-  this.user = {...user};
-  this.userDialog = true;
-}
-
-deleteUser(user: User) {
-  this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + user.name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          this.users = this.users.filter(val => val.id !== user.id);
-          this.user = {};
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Deleted', life: 3000});
-      }
-  });
-}
-
-hideDialog() {
-  this.userDialog = false;
-  this.submitted = false;
-}
-
-saveProduct() {
-  this.submitted = true;
-
-  if (this.user.name.trim()) {
-      if (this.user.id) {
-          this.users[this.findIndexById(this.user.id)] = this.user;                
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
-      }
-      else {
-          this.user.id = this.createId();
-          this.users.push(this.user);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
-      }
-
-      this.users = [...this.users];
-      this.userDialog = false;
-      this.user = {};
+  toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
   }
-}
 
-findIndexById(id: string): number {
-  let index = -1;
-  for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === id) {
-          index = i;
-          break;
-      }
+  onDetailToggle(event) {
+    console.log('Detail Toggled', event);
   }
-  return index;
-}
 
-createId(): string {
-  let id = '';
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for ( var i = 0; i < 5; i++ ) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return id;
-}
-  // processEdit(item: any) {
-  //   const modalRef = this.modal.open(ActionProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.action = false;
-  //   modalRef.componentInstance.product = item;
-  //   modalRef.result.then(value => {
-  //       if (value === 'success') {
-  //         this.processSearchData();
-  //       }
-  //     },
-  //   );
-  // }
 
-  
 
-  // processSave($event: any) {
-  //   const modalRef = this.modal.open(ActionProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.action = true;
-  //   modalRef.result.then(value => {
-  //     if (value === 'success') {
-  //       this.processSearchData();
-  //     }
-  //   }, (reason) => {
 
-  //   });
-  // }
-
-  // processDelete(id: any) {
-  //   const modalRef = this.modal.open(DeleteProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.idProduct = id;
-  //   modalRef.result.then(value => {
-  //     if (value === 'success') {
-  //       this.processSearchData();
-  //     }
-  //   }, (reason) => {
-  //   });
-  // }
 }

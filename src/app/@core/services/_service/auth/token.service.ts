@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 
-const TOKEN_KEY = 'AuthToken';
-const USER_KEY = 'AuthUser';
+const TOKEN_KEY = 'auth-token';
+const USER_KEY = 'auth-user';
 
 
 @Injectable({
@@ -15,12 +15,7 @@ export class TokenService {
   }
 
   getToken() {
-    return this.cookie.get(TOKEN_KEY);
-  }
-
-  setToken(token: string) {
-    this.cookie.delete(TOKEN_KEY);
-    this.cookie.set(TOKEN_KEY, token);
+    return window.sessionStorage.getItem(TOKEN_KEY);
   }
 
   public saveToken(token: string): void {

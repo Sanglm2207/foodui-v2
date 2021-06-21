@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharesModule } from '../../shares/shares.module';
-import { ActionUserComponent } from './action-user/action-user.component';
-import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { UserService } from './user.service';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 const routes: Routes = [
   {
@@ -17,16 +15,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserComponent,
-    ActionUserComponent,
-    DeleteUserComponent
+    UserComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharesModule
+    SharesModule,
+    NgxDatatableModule,
   ],
-  providers: [UserService, MessageService, ConfirmationService]
+  providers: [ MessageService, ConfirmationService]
 
 })
 export class UserModule { }

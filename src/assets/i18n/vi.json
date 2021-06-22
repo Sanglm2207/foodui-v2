@@ -62,9 +62,9 @@
   "title.table.createdDate": "Ngày tạo",
   "sidebar.dashboard": "Bảng điều khiển",
   "sidebar.users": "Người dùng",
-  "sidebar.tables": "Tables",
-  "sidebar.category": "Loại sản phẩm",
-  "sidebar.options": "Lựa chọn",
+  "sidebar.tables": "Bàn ăn",
+  "sidebar.foods": "Thực phẩm",
+  "sidebar.category": "Danh mục thực phẩm",
   "sidebar.size": "Kích thước",
   "sidebar.ice": "Đá",
   "sidebar.store": "Cửa hàng",
@@ -107,6 +107,9 @@
   "title.table.addNew": "Thêm mới một bàn ăn",
   "title.table.add": "Thêm bàn ăn",
 
+  "title.food.listFood": "Danh sách món ăn",
+  "title.food.addNew": "Thêm một món ăn mới",
+  "title.food.add": "Thêm món ăn",
 
   "title.options.ice.list": "Danh sách chọn nước đá",
   "title.options.ice.add": "Thêm mới nước đá",

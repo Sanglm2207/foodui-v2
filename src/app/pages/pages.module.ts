@@ -3,18 +3,15 @@ import {NbMenuModule} from '@nebular/theme';
 
 import {ThemeModule} from '../@theme/theme.module';
 import {PagesComponent} from './pages.component';
-import {DashboardModule} from './dashboard/dashboard.module';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {MessageService} from 'primeng/api';
 import {PortletModule} from "../shares/portlet/portlet.module";
 import {TooltipModule} from "primeng/tooltip";
 import {TableModule} from "primeng/table";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 // AOT compilation support
@@ -28,7 +25,6 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: DashboardComponent,
     },
     {
       path: 'users',
@@ -36,12 +32,11 @@ const routes: Routes = [{
     },
     {
       path: 'tables',
-      loadChildren: () => import('./table/table.module').then(m => m.TableModule)
+      loadChildren: () => import('./table/table.module').then(m => m.TableModule),
     },
     {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
+      path: 'foods',
+      loadChildren: () => import('./food/food.module').then(m => m.FoodModule),
     },
     {
       path: '',
@@ -61,7 +56,6 @@ const routes: Routes = [{
         RouterModule.forChild(routes),
         ThemeModule,
         NbMenuModule,
-        DashboardModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,

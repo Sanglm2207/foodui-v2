@@ -17,12 +17,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/tables',
   },
   {
-    title: 'Food',
+    title: 'Foods',
     icon: 'shopping-bag-outline',
-    link: '/pages/products',
+    link: '/pages/foods',
   },
   {
-    title: 'Food Type',
+    title: 'Category',
     icon: 'home-outline',
     link: '/pages/store',
   },

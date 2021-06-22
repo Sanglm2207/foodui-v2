@@ -62,8 +62,8 @@
   "sidebar.dashboard": "Dashboard",
   "sidebar.users": "User",
   "sidebar.tables": "Tables",
-  "sidebar.category": "Categories",
-  "sidebar.options": "Options",
+  "sidebar.foods": "Foods",
+  "sidebar.category": "Food Type",
   "sidebar.size": "Size",
   "sidebar.ice": "Ice",
   "sidebar.topping": "Topping",
@@ -101,6 +101,10 @@
   "title.table.listTable": "List Table",
   "title.table.addNew": "Add new table",
   "title.table.add": "Add table",
+
+  "title.food.listFood": "List Food",
+  "title.food.addNew": "Add new food",
+  "title.food.add": "Add food",
 
 
   "title.options.ice.list": "Options Ice",

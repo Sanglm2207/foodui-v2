@@ -12,9 +12,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/users',
   },
   {
-    title: 'Table',
+    title: 'Tables',
     icon: 'layers-outline',
-    link: '/pages/city',
+    link: '/pages/tables',
   },
   {
     title: 'Food',

@@ -62,7 +62,7 @@
   "title.table.createdDate": "Ngày tạo",
   "sidebar.dashboard": "Bảng điều khiển",
   "sidebar.users": "Người dùng",
-  "sidebar.products": "Sản phẩm",
+  "sidebar.tables": "Tables",
   "sidebar.category": "Loại sản phẩm",
   "sidebar.options": "Lựa chọn",
   "sidebar.size": "Kích thước",
@@ -102,6 +102,11 @@
   "title.user.listUser": "Danh sách người dùng",
   "title.user.addNew": "Thêm mới người dùng",
   "title.user.add": "Thêm người dùng",
+
+  "title.table.listTable": "Danh sách bàn ăn",
+  "title.table.addNew": "Thêm mới một bàn ăn",
+  "title.table.add": "Thêm bàn ăn",
+
 
   "title.options.ice.list": "Danh sách chọn nước đá",
   "title.options.ice.add": "Thêm mới nước đá",

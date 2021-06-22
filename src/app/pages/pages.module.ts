@@ -32,8 +32,11 @@ const routes: Routes = [{
     },
     {
       path: 'users',
-      loadChildren: () => import('./user/user.module')
-        .then(m => m.UserModule),
+      loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    },
+    {
+      path: 'tables',
+      loadChildren: () => import('./table/table.module').then(m => m.TableModule)
     },
     {
       path: 'charts',

@@ -61,7 +61,7 @@
   "title.table.createdDate": "Created Date",
   "sidebar.dashboard": "Dashboard",
   "sidebar.users": "User",
-  "sidebar.products": "Product",
+  "sidebar.tables": "Tables",
   "sidebar.category": "Categories",
   "sidebar.options": "Options",
   "sidebar.size": "Size",
@@ -97,6 +97,11 @@
   "title.user.listUser": "List User",
   "title.user.addNew": "Add new user",
   "title.user.add": "Add User",
+
+  "title.table.listTable": "List Table",
+  "title.table.addNew": "Add new table",
+  "title.table.add": "Add table",
+
 
   "title.options.ice.list": "Options Ice",
   "title.options.ice.add": "Add new Option Ice",

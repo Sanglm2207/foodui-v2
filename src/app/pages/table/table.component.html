@@ -1,0 +1,138 @@
+<p-toast></p-toast>
+
+<kt-portlet>
+  <kt-portlet-header [icon]="'pi pi-align-justify'" [class]="'d-flex flex-row'" [title]="'title.table.listTable' | translate">
+  </kt-portlet-header>
+  <kt-portlet-body>
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-button (click)="showModalDialog()" icon="pi pi-plus" label="New" class="p-button-success p-mr-2"></p-button>
+        </ng-template>
+
+        <p-dialog header="Thêm mới một bàn ăn" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+            [draggable]="false" [resizable]="false">
+           
+         
+            <form class="p-m-0" name="tableForm"  [formGroup]="tableForm">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="tableNumber">Name</label>
+                        <input id="tableNumber"  formControlName="tableNumber" pInputText> 
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="seating">Seating</label>
+                        <input id="seating" formControlName="seating" pInputText> 
+                    </div>
+                    <div class="p-field p-col-12">
+                        <label for="location">Location</label>
+                        <input id="location" formControlName="location" pInputText> 
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="posivition">Posivition</label>
+                        <input id="posivition" formControlName="posivition" pInputText> 
+                    </div>
+                </div>
+            </form>
+
+
+
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-check" (click)="save()" label="Save" class="p-button-text"></p-button>
+                <p-button icon="pi pi-times" (click)="displayModal=false" label="Close"></p-button>
+            </ng-template>
+        </p-dialog>
+
+    </p-toolbar>
+
+    <ngx-datatable
+            #table
+            style="height: 360px"
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50"
+            [scrollbarV]="true"
+            [rows]="rows"
+            [columns]="columns"
+            (page)="onPage($event)"
+        >
+        <ngx-datatable-column name="ID">
+            <ng-template
+                ngx-datatable-cell-template
+                let-rowIndex="rowIndex"
+                let-row="row"
+            >
+                {{ rowIndex }}
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Name" prop="tableNumber">
+            <ng-template ngx-datatable-cell-template let-value="value">
+                {{ value }}
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Seating" prop="seating">
+            <ng-template ngx-datatable-cell-template let-value="value">
+                {{ value }}
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Location" prop="location">
+            <ng-template ngx-datatable-cell-template let-value="value">
+                {{ value }}
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Posivition" prop="posivition">
+            <ng-template ngx-datatable-cell-template let-value="value">
+                {{ value }}
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Status" prop="status">
+            <ng-template ngx-datatable-cell-template let-value="value">
+                <mat-chip-list>
+                <mat-chip color="primary" *ngIf="value === true">Đã đặt</mat-chip>
+                <mat-chip color="accent" *ngIf="value === false">Còn trống</mat-chip>
+                </mat-chip-list>
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Action" >
+            <ng-template ngx-datatable-cell-template>
+                <button mat-icon-button color="primary" (click)="edit()">
+                <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteUser())">
+                <mat-icon>delete</mat-icon>
+                </button>
+            </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+                <ng-template
+                ngx-datatable-footer-template
+                let-rowCount="rowCount"
+                let-pageSize="pageSize"
+                let-selectedCount="selectedCount"
+                let-curPage="curPage"
+                let-offset="offset"
+                >
+                <div style="padding: 5px 10px">
+                    <div>
+                    Rows: {{ rowCount }} | Size: {{ pageSize }} | Current:
+                    {{ curPage }} | Offset: {{ offset }}
+                    </div>
+                </div>
+                </ng-template>
+            </ngx-datatable-footer>
+        </ngx-datatable>
+</div>

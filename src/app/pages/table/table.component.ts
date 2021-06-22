@@ -19,14 +19,9 @@ class PagedData<T> {
 })
 export class TableComponent implements OnInit {
 
-
-  ColumnMode = ColumnMode;
-
   displayModal: boolean;
 
   position: string;
-
-  tableForm: FormGroup;
 
   tableDialog: boolean;
 
@@ -41,17 +36,12 @@ export class TableComponent implements OnInit {
   stateOptions: any[];
 
   constructor(private tableService: TableService,
-    private spinner: NgxSpinnerService,
-    private el: ElementRef,
     private primengConfig: PrimeNGConfig,
-    private router: Router,
-    private fb: FormBuilder,
     private toastr: ToastrService,
-    private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.getAllTables();
     this.primengConfig.ripple = true;
     this.stateOptions = [
       { label: "Đã đặt", value: "true" },
@@ -60,7 +50,7 @@ export class TableComponent implements OnInit {
   }
 
 
-  public getAllUsers(): void {
+  public getAllTables(): void {
     this.tableService.getListTable().subscribe(data => {
       this.tables = data;
     }, error => {
@@ -74,10 +64,6 @@ export class TableComponent implements OnInit {
     this.tableDialog = true;
   }
 
-  showModalDialog() {
-    this.displayModal = true;
-  }
-
   deleteProduct(table: Table) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + table.tableNumber + '?',
@@ -86,7 +72,7 @@ export class TableComponent implements OnInit {
       accept: () => {
         this.tableService.deleteTable(table.id).subscribe(data => {
           this.toastr.success("Deleted table successfully!")
-          this.getAllUsers();
+          this.getAllTables();
         })
       }
     });
@@ -107,7 +93,7 @@ export class TableComponent implements OnInit {
       .subscribe(
         data => {
           this.toastr.success('Thêm mới thành công');
-          this.getAllUsers();
+          this.getAllTables();
           this.displayModal = false;
         },
         error => {

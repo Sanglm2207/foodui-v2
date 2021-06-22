@@ -1,138 +1,172 @@
 <p-toast></p-toast>
 
 <kt-portlet>
-  <kt-portlet-header [icon]="'pi pi-align-justify'" [class]="'d-flex flex-row'" [title]="'title.table.listTable' | translate">
+  <kt-portlet-header
+    [icon]="'pi pi-align-justify'"
+    [class]="'d-flex flex-row'"
+    [title]="'title.table.listTable' | translate"
+  >
   </kt-portlet-header>
   <kt-portlet-body>
-
-<div class="card">
-    <p-toolbar styleClass="p-mb-4">
+    <div class="card">
+      <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-            <p-button (click)="showModalDialog()" icon="pi pi-plus" label="New" class="p-button-success p-mr-2"></p-button>
+          <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
+            chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+          <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
         </ng-template>
+      </p-toolbar>
 
-        <p-dialog header="Thêm mới một bàn ăn" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-            [draggable]="false" [resizable]="false">
-           
-         
-            <form class="p-m-0" name="tableForm"  [formGroup]="tableForm">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="tableNumber">Name</label>
-                        <input id="tableNumber"  formControlName="tableNumber" pInputText> 
-                    </div>
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="seating">Seating</label>
-                        <input id="seating" formControlName="seating" pInputText> 
-                    </div>
-                    <div class="p-field p-col-12">
-                        <label for="location">Location</label>
-                        <input id="location" formControlName="location" pInputText> 
-                    </div>
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="posivition">Posivition</label>
-                        <input id="posivition" formControlName="posivition" pInputText> 
-                    </div>
-                </div>
-            </form>
+      <p-table
+        #dt
+        [value]="tables"
+        [rows]="10"
+        [paginator]="true"
+        [(selection)]="selectedTables"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="tableNumber">
+              Name <p-sortIcon field="tableNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="seating">
+              Seating <p-sortIcon field="seating"></p-sortIcon>
+            </th>
+            <th pSortableColumn="location">
+              Location <p-sortIcon field="location"></p-sortIcon>
+            </th>
+            <th pSortableColumn="posivition">
+              Posivition <p-sortIcon field="posivition"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">
+              Status <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-table>
+          <tr>
+            <td>{{ table.tableNumber }}</td>
+            <td>{{ table.seating }}</td>
+            <td>{{ table.location }}</td>
+            <td>{{ table.posivition }}</td>
+            <td>
+              <span *ngIf="table.status === true">
+                <p-tag severity="danger" value="Đã đặt" [rounded]="true"></p-tag>
+              </span>
+              
+              <span *ngIf="table.status === false">
+                <p-tag styleClass="p-mr-2" value="Còn trống" [rounded]="true"></p-tag>
+              </span>
+            </td>
+            <td>
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                (click)="editProduct(table)"></button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                (click)="deleteProduct(table)" ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="p-d-flex p-ai-center p-jc-between">
+            In total there are {{ tables ? tables.length : 0 }} tables.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+
+
+<p-dialog [(visible)]="tableDialog" [style]="{width: '450px'}" header="Thêm mới bàn ăn" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="tableNumber">Name</label>
+            <input type="text" pInputText id="tableNumber" [(ngModel)]="table.tableNumber" required autofocus />
+        </div>
+         <div class="p-field">
+            <label for="seating">Seating</label>
+            <p-inputNumber id="seating" [(ngModel)]="table.seating"></p-inputNumber>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="location">Location</label>
+                <input type="text" pInputText id="location" [(ngModel)]="table.location" required autofocus />
+            </div>
+            <div class="p-field p-col">
+                <label for="posivition">Posivition</label>
+                <input type="text" pInputText id="posivition" [(ngModel)]="table.posivition" required autofocus />
+            </div>
+        </div>
+
+        <div class="p-field">
+            <p-selectButton [options]="stateOptions" [(ngModel)]="table.status" optionLabel="label" optionValue="value"></p-selectButton>
+        </div>
+          
+       
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
 
 
-            <ng-template pTemplate="footer">
-                <p-button icon="pi pi-check" (click)="save()" label="Save" class="p-button-text"></p-button>
-                <p-button icon="pi pi-times" (click)="displayModal=false" label="Close"></p-button>
-            </ng-template>
-        </p-dialog>
 
-    </p-toolbar>
 
-    <ngx-datatable
-            #table
-            style="height: 360px"
-            class="material expandable"
-            [columnMode]="ColumnMode.force"
-            [headerHeight]="50"
-            [footerHeight]="50"
-            [rowHeight]="50"
-            [scrollbarV]="true"
-            [rows]="rows"
-            [columns]="columns"
-            (page)="onPage($event)"
-        >
-        <ngx-datatable-column name="ID">
-            <ng-template
-                ngx-datatable-cell-template
-                let-rowIndex="rowIndex"
-                let-row="row"
-            >
-                {{ rowIndex }}
-            </ng-template>
-            </ngx-datatable-column>
 
-            <ngx-datatable-column name="Name" prop="tableNumber">
-            <ng-template ngx-datatable-cell-template let-value="value">
-                {{ value }}
-            </ng-template>
-            </ngx-datatable-column>
+    <p-dialog
+      header="Thêm mới một bàn ăn"
+      [(visible)]="displayModal"
+      [modal]="true"
+      [style]="{ width: '50vw' }"
+      [baseZIndex]="10000"
+      [draggable]="false"
+      [resizable]="false"
+    >
+      <form class="p-m-0" name="tableForm" [formGroup]="tableForm">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-6">
+            <label for="tableNumber">Name</label>
+            <input id="tableNumber" formControlName="tableNumber" pInputText />
+          </div>
+          <div class="p-field p-col-12 p-md-6">
+            <label for="seating">Seating</label>
+            <input id="seating" formControlName="seating" pInputText />
+          </div>
+          <div class="p-field p-col-12">
+            <label for="location">Location</label>
+            <input id="location" formControlName="location" pInputText />
+          </div>
+          <div class="p-field p-col-12 p-md-6">
+            <label for="posivition">Posivition</label>
+            <input id="posivition" formControlName="posivition" pInputText />
+          </div>
+        </div>
+      </form>
 
-            <ngx-datatable-column name="Seating" prop="seating">
-            <ng-template ngx-datatable-cell-template let-value="value">
-                {{ value }}
-            </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Location" prop="location">
-            <ng-template ngx-datatable-cell-template let-value="value">
-                {{ value }}
-            </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Posivition" prop="posivition">
-            <ng-template ngx-datatable-cell-template let-value="value">
-                {{ value }}
-            </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Status" prop="status">
-            <ng-template ngx-datatable-cell-template let-value="value">
-                <mat-chip-list>
-                <mat-chip color="primary" *ngIf="value === true">Đã đặt</mat-chip>
-                <mat-chip color="accent" *ngIf="value === false">Còn trống</mat-chip>
-                </mat-chip-list>
-            </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Action" >
-            <ng-template ngx-datatable-cell-template>
-                <button mat-icon-button color="primary" (click)="edit()">
-                <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="deleteUser())">
-                <mat-icon>delete</mat-icon>
-                </button>
-            </ng-template>
-            </ngx-datatable-column>
-
-            <ngx-datatable-footer>
-                <ng-template
-                ngx-datatable-footer-template
-                let-rowCount="rowCount"
-                let-pageSize="pageSize"
-                let-selectedCount="selectedCount"
-                let-curPage="curPage"
-                let-offset="offset"
-                >
-                <div style="padding: 5px 10px">
-                    <div>
-                    Rows: {{ rowCount }} | Size: {{ pageSize }} | Current:
-                    {{ curPage }} | Offset: {{ offset }}
-                    </div>
-                </div>
-                </ng-template>
-            </ngx-datatable-footer>
-        </ngx-datatable>
-</div>
+      <ng-template pTemplate="footer">
+        <p-button
+          icon="pi pi-check"
+          (click)="save()"
+          label="Save"
+          class="p-button-text"
+        ></p-button>
+        <p-button
+          icon="pi pi-times"
+          (click)="displayModal = false"
+          label="Close"
+        ></p-button>
+      </ng-template> </p-dialog></kt-portlet-body
+></kt-portlet>

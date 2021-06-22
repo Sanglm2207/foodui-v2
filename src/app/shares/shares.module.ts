@@ -29,6 +29,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MaterialModule } from './material.module';
+import { TagModule } from 'primeng/tag';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { MaterialModule } from './material.module';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    MaterialModule
+    MaterialModule,
+    TagModule
   ],
   exports: [
     PortletModule,
@@ -93,7 +95,8 @@ import { MaterialModule } from './material.module';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    MaterialModule
+    MaterialModule,
+    TagModule
   ]
 })
 export class SharesModule { }

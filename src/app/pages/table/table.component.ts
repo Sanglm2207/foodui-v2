@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
-import { Page } from '../../shares/models/page';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { Table } from './table.model';
 import { TableService } from './table.service';
 
 class PagedData<T> {
@@ -20,24 +19,6 @@ class PagedData<T> {
 })
 export class TableComponent implements OnInit {
 
-  page = new Page();
-  loadingIndicator = true;
-  reorderable = true;
-  rows = [];
-  expanded: any = {};
-  timeout: any;
-
-
-  columns = [
-    { name: 'No', prop: 'no' },
-    { name: 'Name', prop: 'tableNumber' },
-    { name: 'Seating', prop: 'seating' },
-    { name: 'Location', prop: 'location' },
-    { name: 'Posivition', prop: 'posivition' },
-    { name: 'Status', prop: 'status' },
-    { name: 'Action', prop: 'action' },
-  ];
-  @ViewChild(DatatableComponent) table: DatatableComponent;
 
   ColumnMode = ColumnMode;
 
@@ -46,90 +27,93 @@ export class TableComponent implements OnInit {
   position: string;
 
   tableForm: FormGroup;
-  
+
+  tableDialog: boolean;
+
+  tables: Table[];
+
+  table: Table;
+
+  selectedTables: Table[];
+
+  submitted: boolean;
+
+  stateOptions: any[];
+
   constructor(private tableService: TableService,
-              private spinner: NgxSpinnerService,
-              private el: ElementRef,
-              private primengConfig: PrimeNGConfig,
-              private router: Router,
-              private fb: FormBuilder,
-              private toastr: ToastrService,
-              private confirmationService: ConfirmationService) { }
+    private spinner: NgxSpinnerService,
+    private el: ElementRef,
+    private primengConfig: PrimeNGConfig,
+    private router: Router,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
-    this.initForm();
     this.primengConfig.ripple = true;
+    this.stateOptions = [
+      { label: "Đã đặt", value: "true" },
+      { label: "Còn trống", value: "false" }
+    ];
   }
 
-  public initForm() {
-    this.tableForm = this.fb.group({
-      tableNumber: ['', Validators.required],
-      seating: ['', Validators.required],
-      location: ['', Validators.required],
-      posivition: ['', Validators.required],
-      status: [true]
-    })
-  }
-
-  get f() {
-    return this.tableForm.controls;
-  }
-
-  onPage(event) {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      console.log('paged!', event);
-    }, 100);
-  }
 
   public getAllUsers(): void {
     this.tableService.getListTable().subscribe(data => {
-      this.rows = data as string[];
-      setTimeout(() => {
-        this.loadingIndicator = false;
-      }, 1500);
+      this.tables = data;
     }, error => {
       console.log(error);
     });
   }
 
-
-  toggleExpandRow(row) {
-    console.log('Toggled Expand Row!', row);
-    this.table.rowDetail.toggleExpandRow(row);
-  }
-
-  onDetailToggle(event) {
-    console.log('Detail Toggled', event);
+  openNew() {
+    this.table = {};
+    this.submitted = false;
+    this.tableDialog = true;
   }
 
   showModalDialog() {
     this.displayModal = true;
-}
+  }
 
-save() {
-  this.tableService.createTable(this.tableForm.value)
-    .subscribe(
-      data => {
-        this.toastr.success('Thêm mới thành công');
-        this.getAllUsers();
-        this.displayModal=false;
-      },
-      error => {
-        console.log(error);
-        this.toastr.error('Thêm mới thất bại !');
+  deleteProduct(table: Table) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + table.tableNumber + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.tableService.deleteTable(table.id).subscribe(data => {
+          this.toastr.success("Deleted table successfully!")
+          this.getAllUsers();
+        })
       }
-    );
-}
+    });
+  }
 
-public deleteTable(id: number) {
-  this.tableService.deleteTable(id).subscribe(data => {
-    this.toastr.success("Deleted table successfully!")
-    this.getAllUsers();
-  })
-}
+  editProduct(table: Table) {
+    this.table = { ...table };
+    this.tableDialog = true;
+  }
 
+  hideDialog() {
+    this.tableDialog = false;
+    this.submitted = false;
+  }
 
-
+  saveTable() {
+    this.tableService.createTable(this.table)
+      .subscribe(
+        data => {
+          this.toastr.success('Thêm mới thành công');
+          this.getAllUsers();
+          this.displayModal = false;
+        },
+        error => {
+          console.log(error);
+          this.toastr.error('Thêm mới thất bại !');
+        }
+      );
+  }
 }

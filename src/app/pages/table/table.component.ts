@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
 
   submitted: boolean;
 
-  stateOptions: any[];
+  statuses: any[];
 
   constructor(private tableService: TableService,
     private primengConfig: PrimeNGConfig,
@@ -43,7 +43,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTables();
     this.primengConfig.ripple = true;
-    this.stateOptions = [
+    this.statuses = [
       { label: "Đã đặt", value: "true" },
       { label: "Còn trống", value: "false" }
     ];

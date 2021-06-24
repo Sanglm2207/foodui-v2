@@ -13,6 +13,9 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 
 
 const modules = [
@@ -29,8 +32,12 @@ const modules = [
   MatChipsModule,
   MatDialogModule,
   MatRadioModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule,
+  MatGridListModule,
 ];
+
+
 @NgModule({
   imports: [...modules],
   exports: [...modules]

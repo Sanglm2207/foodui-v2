@@ -64,12 +64,6 @@
   "sidebar.tables": "Tables",
   "sidebar.foods": "Foods",
   "sidebar.category": "Food Type",
-  "sidebar.size": "Size",
-  "sidebar.ice": "Ice",
-  "sidebar.topping": "Topping",
-  "sidebar.customer": "Customer",
-  "sidebar.store": "Store",
-  "sidebar.city": "Representative Office",
   "sidebar.order": "Order",
 
   "title.placeholder.uploadFile": "Upload file",
@@ -105,6 +99,13 @@
   "title.food.listFood": "List Food",
   "title.food.addNew": "Add new food",
   "title.food.add": "Add food",
+
+  "title.category.listCategories": "List categories",
+  "title.category.addCategory": "Add new category",
+  "title.category.add": "Add category",
+
+  "title.order.listOrders": "List orders",
+
 
 
   "title.options.ice.list": "Options Ice",
@@ -165,13 +166,7 @@
   "title.city.list": "Data City",
   "title.city.add": "Add new city",
   "title.city.edit": "Edit city",
-  "title.order.list": "Data Orders",
-  "title.order.code": "Order code",
-  "title.order.total": "Total",
-  "title.order.createdDate": "Created date",
-  "title.order.add": "Add new order",
-  "title.order.edit": "Edit order",
-  "title.order.detail": "Details order",
+
 
 
   "message.add.success": "Success",

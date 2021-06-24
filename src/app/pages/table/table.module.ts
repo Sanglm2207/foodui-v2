@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: TableComponent,
   },
-]
+];
 
 @NgModule({
   declarations: [TableComponent],
@@ -22,6 +22,6 @@ const routes: Routes = [
     SharesModule,
     NgxDatatableModule,
   ],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
 })
 export class TableModule { }

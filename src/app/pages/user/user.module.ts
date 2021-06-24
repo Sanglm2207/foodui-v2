@@ -11,19 +11,19 @@ const routes: Routes = [
     path: '',
     component: UserComponent,
   },
-]
+];
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharesModule,
     NgxDatatableModule,
+    SharesModule,
   ],
-  providers: [ MessageService, ConfirmationService]
+  providers: [ MessageService, ConfirmationService],
 
 })
 export class UserModule { }

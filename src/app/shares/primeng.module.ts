@@ -47,7 +47,8 @@ const modules = [
     MessageService,
     InputTextareaModule,
     TagModule,
-    PanelModule
+    PanelModule,
+    ConfirmDialogModule
 ];
 
 @NgModule({

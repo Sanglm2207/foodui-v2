@@ -25,6 +25,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
+      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     },
     {
       path: 'users',
@@ -37,6 +38,14 @@ const routes: Routes = [{
     {
       path: 'foods',
       loadChildren: () => import('./food/food.module').then(m => m.FoodModule),
+    },
+    {
+      path: 'category',
+      loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
+    },
+    {
+      path: 'order',
+      loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
     },
     {
       path: '',

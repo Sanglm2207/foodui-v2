@@ -65,12 +65,6 @@
   "sidebar.tables": "Bàn ăn",
   "sidebar.foods": "Thực phẩm",
   "sidebar.category": "Danh mục thực phẩm",
-  "sidebar.size": "Kích thước",
-  "sidebar.ice": "Đá",
-  "sidebar.store": "Cửa hàng",
-  "sidebar.topping": "Topping",
-  "sidebar.customer": "Khách hàng",
-  "sidebar.city": "Văn phòng đại diện",
   "sidebar.order": "Đơn đặt hàng",
   "title.placeholder.uploadFile": "Tải tệp lên",
 
@@ -110,6 +104,15 @@
   "title.food.listFood": "Danh sách món ăn",
   "title.food.addNew": "Thêm một món ăn mới",
   "title.food.add": "Thêm món ăn",
+
+  "title.category.listCategories": "Danh mục các món ăn",
+  "title.category.addCategory": "Thêm mới một danh mục",
+  "title.category.add": "Thêm danh mục",
+
+  "title.order.listOrders": "Danh sách đơn hàng",
+
+
+  
 
   "title.options.ice.list": "Danh sách chọn nước đá",
   "title.options.ice.add": "Thêm mới nước đá",
@@ -167,13 +170,6 @@
   "title.city.list": "Danh dách các công ty",
   "title.city.add": "Thêm mới công ty",
   "title.city.edit": "Chỉnh sửa công ty",
-  "title.order.list": "Danh sách đơn đặt hàng",
-  "title.order.code": "Mã hóa đơn",
-  "title.order.total": "Tổng tiền",
-  "title.order.createdDate": "Ngày tạo",
-  "title.order.add": "Thêm mới hóa đơn",
-  "title.order.edit": "Chỉnh sửa hóa đơn",
-  "title.order.detail": "Chi tiết hóa đơn",
 
 
 

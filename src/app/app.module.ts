@@ -29,8 +29,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthInterceptor } from './@core/intercepters/auth.interceptor';
 
 const configToast: any = {
-  timeOut: 2000,
-  positionClass: 'toast-bottom-right',
+  timeOut: 3000,
+  positionClass: 'toast-top-right',
   preventDuplicates: true,
   progressBar: true,
   progressAnimation: 'increasing',
@@ -68,16 +68,16 @@ export function httpTranslateLoader(http: HttpClient) {
         useFactory: httpTranslateLoader,
         deps: [HttpClient],
       },
-    })
+    }),
   ],
   bootstrap: [AppComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class AppModule {
 }

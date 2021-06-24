@@ -18,10 +18,10 @@ const modules = [
   ReactiveFormsModule,
   HttpClientModule,
   FormsModule,
-  MaterialModule,
-  PrimengModule,
   NgxEchartsModule,
   TrendModule,
+  MaterialModule,
+  PrimengModule,
 ];
 
 @NgModule({

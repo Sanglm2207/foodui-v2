@@ -44,7 +44,6 @@ const modules = [
     ToolbarModule,
     RatingModule,
     RadioButtonModule,
-    MessageService,
     InputTextareaModule,
     TagModule,
     PanelModule,
@@ -53,6 +52,7 @@ const modules = [
 
 @NgModule({
     imports: [...modules],
-    exports: [...modules]
+    exports: [...modules],
+    providers: [MessageService]
   })
   export class PrimengModule { }

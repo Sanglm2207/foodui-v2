@@ -11,6 +11,11 @@ class PagedData<T> {
   data: T[];
 }
 
+interface City {
+  name: string,
+  code: string
+}
+
 @Component({
   selector: 'ngx-user',
   templateUrl: './user.component.html',
@@ -82,17 +87,49 @@ export class UserComponent implements OnInit {
   }
 
   saveTable() {
-    this.userService.createUser(this.user)
-      .subscribe(
-        data => {
-          this.toastr.success('Thêm mới thành công');
-          this.getAllUsers();
-          this.displayModal = false;
-        },
-        error => {
-          console.log(error);
-          this.toastr.error('Thêm mới thất bại !');
+    this.submitted = true;
+
+    if (this.user.name.trim()) {
+        if (this.user.id) {
+            this.users[this.findIndexById(this.user.id)] = this.user;
+            this.userService.editUser(this.user, this.user.id).subscribe(data => {
+              this.toastr.success('User update successfully !');
+              this.getAllUsers();
+              this.displayModal = false;
+            }, error => {
+              console.log(error);
+              this.toastr.error('User update failed !');
+            })
         }
-      );
+        else {
+          this.userService.createUser(this.user).subscribe(
+            data => {
+              this.toastr.success('User create successfully !');
+              this.getAllUsers();
+              this.displayModal = false;
+            },
+            error => {
+              console.log(error);
+              this.toastr.error('User create failed !');
+            }
+          );
+        }
+        this.users = [...this.users];
+        this.userDialog = false;
+        this.user = {};
+    }
+    
   }
+
+  findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+  }
+
 }

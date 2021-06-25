@@ -107,12 +107,8 @@
         </div>
 
         <div class="p-field">
-          <label for="status">Status</label>
-          <p-dropdown [(ngModel)]="table.status" inputId="status" [options]="statuses" placeholder="Select">
-                  <ng-template let-option pTemplate="item">
-                      <span [class]="'table-badge status-' + option.value">{{option.label}}</span>
-                  </ng-template>
-          </p-dropdown>
+          <label for="status">Status</label> <br>
+          <p-inputSwitch [(ngModel)]="table.status"></p-inputSwitch>
         </div>
           
        

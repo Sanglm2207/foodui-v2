@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/api';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TagModule } from 'primeng/tag';
 import { PanelModule } from 'primeng/panel';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 const modules = [
     DropdownModule,
@@ -47,7 +48,8 @@ const modules = [
     InputTextareaModule,
     TagModule,
     PanelModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputSwitchModule
 ];
 
 @NgModule({

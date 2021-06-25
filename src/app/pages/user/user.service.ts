@@ -25,4 +25,9 @@ export class UserService {
   createUser(user: User): Observable<User[]>  {
     return this.http.post<User[]>(this.baseUrl + 'createUser', user);
   }
+
+  editUser(user: User, id: number): Observable<User[]> {
+    return this.http.put<User[]>(this.baseUrl + 'editUser/' + id, user);
+  }
+
 }

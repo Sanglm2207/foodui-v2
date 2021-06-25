@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
+import { Category } from '../../@core/_config/_models/category.model';
 import { Food } from '../../@core/_config/_models/food.model';
+import { CategoryService } from '../category/category.service';
 import { FoodService } from './food.service';
 
 @Component({
@@ -21,7 +23,10 @@ export class FoodComponent implements OnInit {
 
   submitted: boolean;
 
+  categories: Category[];
+
   constructor(private foodService: FoodService,
+              private categoryService: CategoryService,
                private confirmationService: ConfirmationService,
                private primengConfig: PrimeNGConfig,
                private toastr: ToastrService) { }
@@ -29,6 +34,7 @@ export class FoodComponent implements OnInit {
   ngOnInit(): void {
     this.getAllFoods();
     this.primengConfig.ripple = true;
+    this.getAllCategories();
   }
 
   public getAllFoods(): void {
@@ -37,6 +43,14 @@ export class FoodComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  public getAllCategories(): void {
+    this.categoryService.getAllCategories().subscribe(data => {
+      this.categories = data;
+      console.log(this.categories);
+      
+    })
   }
 
   openNew() {

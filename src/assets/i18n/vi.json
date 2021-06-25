@@ -139,41 +139,6 @@
   "title.category.editTitle": "Chỉnh sửa loại sản phẩm",
 
 
-  "title.customer.list": "Danh sách khách hàng",
-  "title.customer.statistical": "Thống kê khách hàng",
-  "title.customer.travel": "Du lịch",
-  "title.customer.postal": "Bưu điện",
-  "title.customer.name": "Tên khách hàng",
-  "title.customer.name.required": "Tên khách hàng không được để trống",
-  "title.customer.city": "Thành phố",
-  "title.customer.dateOrder": "Ngày đặt đầu tiên",
-  "title.customer.tourGuide": "Hướng dẫn viên du lịch",
-  "title.customer.tourGuide.required": "Hướng dẫn viên du lịch không được để trống",
-  "title.customer.time": "Thời gian",
-  "title.customer.postalAddress": "Địa chỉ bưu điện",
-
-  "title.customer.postal.name": "Địa chỉ bưu điện",
-  "title.customer.postal.required": "Địa chỉ bưu điện không được để trống",
-
-  "title.customer.add": "Thêm mới khách hàng ",
-  "title.customer.edit": "Chỉnh sửa khách hàng",
-  "title.city.name": "Tên thành phố",
-  "title.city.department.name": "Văn phòng đại diện",
-  "title.city.department.name.required": "Văn phòng đại diện không được để trống",
-  "title.city.name.required": "Tên thành phố không được để trống",
-  "title.city.address": "Địa chỉ",
-  "title.city.address.required": "Địa chỉ không được để trống",
-  "title.city.state": "Bang",
-  "title.city.state.required": "Bang Không được để trống",
-  "title.city.founding": "Ngày thành lập",
-  "title.city.founding.required": "Ngày thành lập không được để trống",
-  "title.city.list": "Danh dách các công ty",
-  "title.city.add": "Thêm mới công ty",
-  "title.city.edit": "Chỉnh sửa công ty",
-
-
-
-
   "message.add.success": "Thêm mới thành công",
   "message.delete": "Xác nhận xóa?",
   "message.delete.notify": "Thông báo xóa",

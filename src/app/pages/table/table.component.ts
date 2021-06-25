@@ -89,17 +89,47 @@ export class TableComponent implements OnInit {
   }
 
   saveTable() {
-    this.tableService.createTable(this.table)
-      .subscribe(
-        data => {
-          this.toastr.success('Thêm mới thành công');
-          this.getAllTables();
-          this.displayModal = false;
-        },
-        error => {
-          console.log(error);
-          this.toastr.error('Thêm mới thất bại !');
+    this.submitted = true;
+
+    if (this.table.tableNumber.trim()) {
+        if (this.table.id) {
+            this.tables[this.findIndexById(this.table.id)] = this.table;
+            this.tableService.editTable(this.table, this.table.id).subscribe(data => {
+              this.toastr.success('Table update successfully !');
+              this.getAllTables();
+              this.displayModal = false;
+            }, error => {
+              this.toastr.error('Table update failed !');
+            })
         }
-      );
+        else {
+          this.tableService.createTable(this.table).subscribe(
+            data => {
+              this.toastr.success('Thêm mới thành công');
+              this.getAllTables();
+              this.displayModal = false;
+            },
+            error => {
+              console.log(error);
+              this.toastr.error('Thêm mới thất bại !');
+            }
+          );
+        }
+        this.tables = [...this.tables];
+        this.tableDialog = false;
+        this.table = {};
+    }
+   
+  }
+
+  findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.tables.length; i++) {
+        if (this.tables[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+    return index;
   }
 }

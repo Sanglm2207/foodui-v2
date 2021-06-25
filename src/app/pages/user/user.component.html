@@ -85,59 +85,58 @@
         </ng-template>
         <ng-template pTemplate="summary">
           <div class="p-d-flex p-ai-center p-jc-between">
-            In total there are {{ tables ? tables.length : 0 }} user.
+            In total there are {{ users ? users.length : 0 }} user.
           </div>
         </ng-template>
       </p-table>
     </div>
 
-
-<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm mới người dùng" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="p-formgrid p-grid">
-          <div class="p-field p-col">
-              <label for="username">Username</label>
-              <input type="text" pInputText id="username" [(ngModel)]="user.username" required autofocus />
-          </div>
-          <div class="p-field p-col">
+    <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm mới người dùng" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
               <label for="name">Fullname</label>
               <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
-          </div>
-        </div>
-        <div class="p-formgrid p-grid">
-          <div class="p-field p-col">
-              <label for="email">Email</label>
-              <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus />
-          </div>
-          <div class="p-field p-col">
-              <label for="phoneNumber">Phone</label>
-              <input type="text" pInputText id="phoneNumber" [(ngModel)]="user.phoneNumber" required autofocus />
-          </div>
-        </div>
-
-        <div class="p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="birthday">Birthday</label>
-                <input type="text" pInputText id="birthday" [(ngModel)]="user.birthday" required autofocus />
             </div>
-            <div class="p-field p-col">
-                <label for="address">Address</label>
-                <input type="text" pInputText id="address" [(ngModel)]="user.address" required autofocus />
+              
+            <div class="p-formgrid p-grid">
+              <div class="p-field p-col">
+                  <label for="username">Username</label>
+                  <input type="text" pInputText id="username" [(ngModel)]="user.username" required autofocus />
+              </div>
+              <div class="p-field p-col">
+                  <label for="password">Password</label>
+                  <input type="password" pInputText id="password" [(ngModel)]="user.password" required autofocus />
+              </div>
             </div>
-        </div>
+            <div class="p-formgrid p-grid">
+              <div class="p-field p-col">
+                  <label for="email">Email</label>
+                  <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus />
+              </div>
+              <div class="p-field p-col">
+                  <label for="phoneNumber">Phone</label>
+                  <input type="text" pInputText id="phoneNumber" [(ngModel)]="user.phoneNumber" required autofocus />
+              </div>
+            </div>
 
-        <div class="p-field">
-            <p-selectButton [options]="stateOptions" [(ngModel)]="user.status" optionLabel="label" optionValue="value"></p-selectButton>
-        </div>
-          
-       
-    </ng-template>
-    
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
-    </ng-template>
-</p-dialog>
+            <div class="p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <label for="birthday">Birthday</label>
+                    <p-calendar [(ngModel)]="user.birthday" [showIcon]="true" inputId="birthday" required></p-calendar>
+                </div>
+                <div class="p-field p-col">
+                    <label for="address">Address</label>
+                    <input type="text" pInputText id="address" [(ngModel)]="user.address" required autofocus />
+                </div>
+            </div>
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
+        </ng-template>
+    </p-dialog>
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+  </kt-portlet-body>
+</kt-portlet>

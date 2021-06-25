@@ -24,4 +24,8 @@ export class TableService {
   createTable(table: Table): Observable<Table[]>  {
     return this.http.post<Table[]>(this.baseUrl + 'createTable', table);
   }
+
+  editTable(table: Table, id: number): Observable<Table[]> {
+    return this.http.put<Table[]>(this.baseUrl + 'editTable/' + id, table);
+  }
 }

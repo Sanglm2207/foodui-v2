@@ -12,6 +12,10 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.NgxAuthModule),
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('../app/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+  },
   { path: '', redirectTo: 'pages', pathMatch: 'full'},
   { path: '**', redirectTo: 'error/404' },
 ];

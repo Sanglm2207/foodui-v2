@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-profit-card',
+  styleUrls: ['./profit-card.component.scss'],
   templateUrl: './profit-card.component.html',
-  styleUrls: ['./profit-card.component.scss']
 })
-export class ProfitCardComponent implements OnInit {
+export class ProfitCardComponent {
 
-  constructor() { }
+  flipped = false;
 
-  ngOnInit(): void {
+  toggleView() {
+    this.flipped = !this.flipped;
   }
-
 }

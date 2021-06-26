@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-slide-out',
+  styleUrls: ['./slide-out.component.scss'],
   templateUrl: './slide-out.component.html',
-  styleUrls: ['./slide-out.component.scss']
 })
-export class SlideOutComponent implements OnInit {
+export class SlideOutComponent {
 
-  constructor() { }
+  @Input() showVisitorsStatistics: boolean = false;
 
-  ngOnInit(): void {
+  toggleStatistics() {
+    this.showVisitorsStatistics = !this.showVisitorsStatistics;
   }
-
 }

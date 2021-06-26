@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngx-earning-card',
+  styleUrls: ['./earning-card.component.scss'],
   templateUrl: './earning-card.component.html',
-  styleUrls: ['./earning-card.component.scss']
 })
 export class EarningCardComponent {
 

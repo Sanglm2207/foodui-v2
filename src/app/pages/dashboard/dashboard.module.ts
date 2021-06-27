@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import {
-  NbButtonModule,
-  NbCardModule,
-  NbProgressBarModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbIconModule,
-  NbSelectModule,
-  NbListModule,
-} from '@nebular/theme';
+import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './dashboard.component';
+import { RouterModule, Routes } from '@angular/router';
+import {SharesModule} from '../../shares/shares.module';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ElectricityComponent } from './electricity/electricity.component';
+import { ElectricityChartComponent } from './electricity/electricity-chart/electricity-chart.component';
+import { KittenComponent } from './kitten/kitten.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbIconModule, NbListModule, NbProgressBarModule, NbRadioModule, NbSelectModule, NbTabsetModule, NbUserModule } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { ProfitCardComponent } from './profit-card/profit-card.component';
@@ -54,6 +53,7 @@ import { EarningCardBackComponent } from './earning-card/back-side/earning-card-
 import { EarningPieChartComponent } from './earning-card/back-side/earning-pie-chart.component';
 import { EarningCardFrontComponent } from './earning-card/front-side/earning-card-front.component';
 import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earning-live-update-chart.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 
 @NgModule({
   imports: [
@@ -68,7 +68,6 @@ import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earni
     ChartModule,
     NbProgressBarModule,
     NgxEchartsModule,
-    NgxChartsModule,
     LeafletModule,
   ],
   declarations: [
@@ -107,5 +106,6 @@ import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earni
   providers: [
     CountryOrdersMapService,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardModule { }

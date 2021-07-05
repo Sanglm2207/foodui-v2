@@ -13,25 +13,26 @@ import {AnalyticsService} from './utils/analytics.service';
 import {LayoutService} from './utils/layout.service';
 import {SeoService} from './utils/seo.service';
 import {StateService} from './utils/state.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const socialLinks = [
   {
-    url: 'https://github.com/akveo/nebular',
+    url: 'https://github.com/sanglm2207/',
     target: '_blank',
     icon: 'github',
     title: 'github',
   },
   {
-    url: 'https://www.facebook.com/akveo/',
+    url: 'https://www.facebook.com/sanglm2207/',
     target: '_blank',
     icon: 'facebook',
     title: 'facebook',
   },
   {
-    url: 'https://twitter.com/akveo_inc',
+    url: 'https://twitter.com/sanglm2207',
     target: '_blank',
-    icon: 'google',
-    title: 'google',
+    icon: 'twitter',
+    title: 'twitter',
   },
 ];
 

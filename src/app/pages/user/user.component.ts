@@ -1,18 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProductService } from '../../@core/services/_service/product.service';
 import { User } from '../../@core/_config/_models/user';
 import { UserService } from './user.service';
+import {Page} from '../../shares/models/page';
+import {DatatableComponent, ColumnMode} from '@swimlane/ngx-datatable';
+import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
+
+class PagedData<T> {
+  data: T[];
+}
+
+interface City {
+  name: string,
+  code: string
+}
 
 @Component({
   selector: 'ngx-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
+
+  displayModal: boolean;
+
+  position: string;
 
   userDialog: boolean;
 
@@ -24,25 +37,22 @@ export class UserComponent implements OnInit {
 
   submitted: boolean;
 
-  statuses: any[];
-
-  
-  constructor(private modal: NgbModal,
-              private fb: FormBuilder,
-              private userService: UserService,
-              private spinner: NgxSpinnerService,
-              private messageService: MessageService, 
-              private confirmationService: ConfirmationService) { }
+  constructor(private userService: UserService,
+              private primengConfig: PrimeNGConfig,
+              private toastr: ToastrService,
+              private confirmationService: ConfirmationService) {
+              }
 
   ngOnInit(): void {
-    this.getListUser();
+    this.getAllUsers();
+    this.primengConfig.ripple = true;
   }
 
-  
-
-  getListUser() {
-    this.userService.getListUser().subscribe(res => {
-      this.users = res.data;
+  public getAllUsers(): void {
+    this.userService.getListUser().subscribe(data => {
+      this.users = data;
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -50,117 +60,76 @@ export class UserComponent implements OnInit {
     this.user = {};
     this.submitted = false;
     this.userDialog = true;
-}
+  }
 
-deleteSelectedUsers() {
-  this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected users?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          this.users = this.users.filter(val => !this.selectedUsers.includes(val));
-          this.selectedUsers = null;
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Users Deleted', life: 3000});
-      }
-  });
-}
-
-editUser(user: User) {
-  this.user = {...user};
-  this.userDialog = true;
-}
-
-deleteUser(user: User) {
-  this.confirmationService.confirm({
+  deleteUser(user: User) {
+    this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + user.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-          this.users = this.users.filter(val => val.id !== user.id);
-          this.user = {};
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Deleted', life: 3000});
+        this.userService.deleteUser(user.id).subscribe(data => {
+          this.toastr.success("Deleted user successfully!")
+          this.getAllUsers();
+        })
       }
-  });
-}
-
-hideDialog() {
-  this.userDialog = false;
-  this.submitted = false;
-}
-
-saveProduct() {
-  this.submitted = true;
-
-  if (this.user.name.trim()) {
-      if (this.user.id) {
-          this.users[this.findIndexById(this.user.id)] = this.user;                
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Updated', life: 3000});
-      }
-      else {
-          this.user.id = this.createId();
-          this.users.push(this.user);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Created', life: 3000});
-      }
-
-      this.users = [...this.users];
-      this.userDialog = false;
-      this.user = {};
+    });
   }
-}
 
-findIndexById(id: string): number {
-  let index = -1;
-  for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === id) {
-          index = i;
-          break;
-      }
+  editUser(user: User) {
+    this.user = { ...user };
+    this.userDialog = true;
   }
-  return index;
-}
 
-createId(): string {
-  let id = '';
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for ( var i = 0; i < 5; i++ ) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
+  hideDialog() {
+    this.userDialog = false;
+    this.submitted = false;
   }
-  return id;
-}
-  // processEdit(item: any) {
-  //   const modalRef = this.modal.open(ActionProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.action = false;
-  //   modalRef.componentInstance.product = item;
-  //   modalRef.result.then(value => {
-  //       if (value === 'success') {
-  //         this.processSearchData();
-  //       }
-  //     },
-  //   );
-  // }
 
-  
+  saveTable() {
+    this.submitted = true;
 
-  // processSave($event: any) {
-  //   const modalRef = this.modal.open(ActionProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.action = true;
-  //   modalRef.result.then(value => {
-  //     if (value === 'success') {
-  //       this.processSearchData();
-  //     }
-  //   }, (reason) => {
+    if (this.user.name.trim()) {
+        if (this.user.id) {
+            this.users[this.findIndexById(this.user.id)] = this.user;
+            this.userService.editUser(this.user, this.user.id).subscribe(data => {
+              this.toastr.success('User update successfully !');
+              this.getAllUsers();
+              this.displayModal = false;
+            }, error => {
+              console.log(error);
+              this.toastr.error('User update failed !');
+            })
+        }
+        else {
+          this.userService.createUser(this.user).subscribe(
+            data => {
+              this.toastr.success('User create successfully !');
+              this.getAllUsers();
+              this.displayModal = false;
+            },
+            error => {
+              console.log(error);
+              this.toastr.error('User create failed !');
+            }
+          );
+        }
+        this.users = [...this.users];
+        this.userDialog = false;
+        this.user = {};
+    }
+    
+  }
 
-  //   });
-  // }
+  findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+  }
 
-  // processDelete(id: any) {
-  //   const modalRef = this.modal.open(DeleteProductComponent, DEFAULT_MODAL_OPTIONS);
-  //   modalRef.componentInstance.idProduct = id;
-  //   modalRef.result.then(value => {
-  //     if (value === 'success') {
-  //       this.processSearchData();
-  //     }
-  //   }, (reason) => {
-  //   });
-  // }
 }

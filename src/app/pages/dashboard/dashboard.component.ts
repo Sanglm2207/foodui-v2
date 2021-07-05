@@ -1,93 +1,97 @@
-import {Component, OnDestroy} from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators' ;
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { OrderDetail } from '../../@core/_config/_models/OrderDetail';
+import { fadeIn } from '../../shares/animations/fade-in';
+import Color from "../../shares/utils/color.util";
+import { DashboardService } from './dashboard.service';
 
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
+interface Book {
+  name: string;
+  author: string;
 }
+
 
 @Component({
   selector: 'ngx-dashboard',
-  styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [fadeIn]
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit {
 
-  private alive = true;
 
-  solarValue: number;
-  lightCard: CardSettings = {
-    title: 'Light',
-    iconClass: 'nb-lightbulb',
-    type: 'primary',
-  };
-  rollerShadesCard: CardSettings = {
-    title: 'Roller Shades',
-    iconClass: 'nb-roller-shades',
-    type: 'success',
-  };
-  wirelessAudioCard: CardSettings = {
-    title: 'Wireless Audio',
-    iconClass: 'nb-audio',
-    type: 'info',
-  };
-  coffeeMakerCard: CardSettings = {
-    title: 'Coffee Maker',
-    iconClass: 'nb-coffee-maker',
-    type: 'warning',
-  };
+  analysisOrder = []; 
 
-  statusCards: string;
+  constructor(private translate: TranslateService,
+              private dashboardService: DashboardService) { 
 
-  commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard,
-  ];
+  }
 
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-    dark: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.lightCard,
-        type: 'warning',
+  ngOnInit(): void {
+    this.getAnalysisOrderByMonth();
+  }
+
+
+  public getAnalysisOrderByMonth() {
+    this.dashboardService.getAnalysisOrderByMonth().subscribe(data => {
+      this.analysisOrder = data;
+      console.log(this.analysisOrder);
+      
+    })
+  }
+
+  public barChart = {
+    title: {
+      text: "Doanh thu của nhà hàng theo tháng",
+      subtext: "FKC Food",
+      x: "center"
+    },
+    color: Color.baseColor,
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+        type: "shadow"        // 默认为直线，可选为："line" | "shadow"
       },
+      formatter: "Revenue in {b} reached {a}:{c}"
+    },
+    grid: {
+      left: "3%",
+      right: "4%",
+      bottom: "3%",
+      containLabel: true
+    },
+    xAxis: [
       {
-        ...this.rollerShadesCard,
-        type: 'primary',
-      },
-      {
-        ...this.wirelessAudioCard,
-        type: 'danger',
-      },
-      {
-        ...this.coffeeMakerCard,
-        type: 'info',
-      },
+        type: "category",
+        data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Đec"],
+        axisTick: {
+          alignWithLabel: true
+        }
+      }
     ],
-    dark: this.commonStatusCardsSet,
+    yAxis: [
+      {
+        type: "value"
+      }
+    ],
+    series: [
+      {
+        name: "",
+        type: "bar",
+        barWidth: "60%",
+        itemStyle: {
+          normal: {
+            color: params => {
+              const color = Color.genColor(this.barChart.series[0].data);
+              return color[params.dataIndex];
+            }
+          }
+        },
+        data: [10, 52, 200, 334, 390, 330, 220, 1000, 500, 444, 999, 11]
+      }
+    ]
   };
 
-  constructor(private themeService: NbThemeService,
-  ) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
-    });
+  
 
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-  }
 }

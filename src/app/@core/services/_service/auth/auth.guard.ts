@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean |
     UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (sessionStorage.getItem('AuthToken')) {
+      if (sessionStorage.getItem('auth-token')) {
         // logged in so return true
         return true;
       }

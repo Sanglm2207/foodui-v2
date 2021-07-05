@@ -62,15 +62,9 @@
   "title.table.createdDate": "Ngày tạo",
   "sidebar.dashboard": "Bảng điều khiển",
   "sidebar.users": "Người dùng",
-  "sidebar.products": "Sản phẩm",
-  "sidebar.category": "Loại sản phẩm",
-  "sidebar.options": "Lựa chọn",
-  "sidebar.size": "Kích thước",
-  "sidebar.ice": "Đá",
-  "sidebar.store": "Cửa hàng",
-  "sidebar.topping": "Topping",
-  "sidebar.customer": "Khách hàng",
-  "sidebar.city": "Văn phòng đại diện",
+  "sidebar.tables": "Bàn ăn",
+  "sidebar.foods": "Thực phẩm",
+  "sidebar.category": "Danh mục thực phẩm",
   "sidebar.order": "Đơn đặt hàng",
   "title.placeholder.uploadFile": "Tải tệp lên",
 
@@ -103,6 +97,23 @@
   "title.user.addNew": "Thêm mới người dùng",
   "title.user.add": "Thêm người dùng",
 
+  "title.table.listTable": "Danh sách bàn ăn",
+  "title.table.addNew": "Thêm mới một bàn ăn",
+  "title.table.add": "Thêm bàn ăn",
+
+  "title.food.listFood": "Danh sách món ăn",
+  "title.food.addNew": "Thêm một món ăn mới",
+  "title.food.add": "Thêm món ăn",
+
+  "title.category.listCategories": "Danh mục các món ăn",
+  "title.category.addCategory": "Thêm mới một danh mục",
+  "title.category.add": "Thêm danh mục",
+
+  "title.order.listOrders": "Danh sách đơn hàng",
+
+
+  
+
   "title.options.ice.list": "Danh sách chọn nước đá",
   "title.options.ice.add": "Thêm mới nước đá",
   "title.options.ice.edit": "Chỉnh sửa nước đá",
@@ -126,48 +137,6 @@
   "title.category.name.required": "Tên loại sản phẩm không được để trống",
   "title.category.addTitle": "Thêm mới loại sản phẩm",
   "title.category.editTitle": "Chỉnh sửa loại sản phẩm",
-
-
-  "title.customer.list": "Danh sách khách hàng",
-  "title.customer.statistical": "Thống kê khách hàng",
-  "title.customer.travel": "Du lịch",
-  "title.customer.postal": "Bưu điện",
-  "title.customer.name": "Tên khách hàng",
-  "title.customer.name.required": "Tên khách hàng không được để trống",
-  "title.customer.city": "Thành phố",
-  "title.customer.dateOrder": "Ngày đặt đầu tiên",
-  "title.customer.tourGuide": "Hướng dẫn viên du lịch",
-  "title.customer.tourGuide.required": "Hướng dẫn viên du lịch không được để trống",
-  "title.customer.time": "Thời gian",
-  "title.customer.postalAddress": "Địa chỉ bưu điện",
-
-  "title.customer.postal.name": "Địa chỉ bưu điện",
-  "title.customer.postal.required": "Địa chỉ bưu điện không được để trống",
-
-  "title.customer.add": "Thêm mới khách hàng ",
-  "title.customer.edit": "Chỉnh sửa khách hàng",
-  "title.city.name": "Tên thành phố",
-  "title.city.department.name": "Văn phòng đại diện",
-  "title.city.department.name.required": "Văn phòng đại diện không được để trống",
-  "title.city.name.required": "Tên thành phố không được để trống",
-  "title.city.address": "Địa chỉ",
-  "title.city.address.required": "Địa chỉ không được để trống",
-  "title.city.state": "Bang",
-  "title.city.state.required": "Bang Không được để trống",
-  "title.city.founding": "Ngày thành lập",
-  "title.city.founding.required": "Ngày thành lập không được để trống",
-  "title.city.list": "Danh dách các công ty",
-  "title.city.add": "Thêm mới công ty",
-  "title.city.edit": "Chỉnh sửa công ty",
-  "title.order.list": "Danh sách đơn đặt hàng",
-  "title.order.code": "Mã hóa đơn",
-  "title.order.total": "Tổng tiền",
-  "title.order.createdDate": "Ngày tạo",
-  "title.order.add": "Thêm mới hóa đơn",
-  "title.order.edit": "Chỉnh sửa hóa đơn",
-  "title.order.detail": "Chi tiết hóa đơn",
-
-
 
 
   "message.add.success": "Thêm mới thành công",

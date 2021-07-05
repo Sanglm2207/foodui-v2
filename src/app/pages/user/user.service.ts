@@ -1,14 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppSettings } from '../../app.setting';
-
-
-const API_URL =  AppSettings.BASE_URL + 'user/';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { environment } from '../../../environments/environment';
+import { User } from '../../@core/_config/_models/user';
 
 
 @Injectable({
@@ -16,13 +10,24 @@ const httpOptions = {
 })
 export class UserService {
 
+  private readonly baseUrl = `${environment.apiUrl}user/`;
+  
   constructor(private http: HttpClient) { }
 
   getListUser(): Observable<any> {
-    return this.http.get<any>(API_URL + 'getAllUser', httpOptions);
+    return this.http.get<any>(this.baseUrl + 'getAllUser');
   }
 
   deleteUser(id: number): Observable<any[]> {
-    return this.http.delete<any>(API_URL + 'deleteAccount/' + id, httpOptions)
+    return this.http.delete<any>(this.baseUrl + 'deleteAccount/' + id)
   }
+
+  createUser(user: User): Observable<User[]>  {
+    return this.http.post<User[]>(this.baseUrl + 'createUser', user);
+  }
+
+  editUser(user: User, id: number): Observable<User[]> {
+    return this.http.put<User[]>(this.baseUrl + 'editUser/' + id, user);
+  }
+
 }

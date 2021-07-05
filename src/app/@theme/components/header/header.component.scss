@@ -52,6 +52,8 @@
     }
   }
 
+ 
+
   @include media-breakpoint-down(sm) {
     .control-item {
       display: none;
@@ -67,4 +69,8 @@
       display: none;
     }
   }
+}
+
+:host ::ng-deep .user-picture {
+  background: aqua !important;
 }

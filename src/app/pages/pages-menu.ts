@@ -12,19 +12,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/users',
   },
   {
-    title: 'City',
+    title: 'Tables',
     icon: 'layers-outline',
-    link: '/pages/city',
+    link: '/pages/tables',
   },
   {
-    title: 'Products',
+    title: 'Foods',
     icon: 'shopping-bag-outline',
-    link: '/pages/products',
+    link: '/pages/foods',
   },
   {
-    title: 'Store',
+    title: 'Category',
     icon: 'home-outline',
-    link: '/pages/store',
+    link: '/pages/category',
   },
   {
     title: 'Order',

@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           this.roles = this.tokenService.getUser().roles;
-          this.router.navigate(['/pages/dashboard']);
+          this.router.navigate(['/pages/']);
         },
         err => {
           this.errorMessage = err.error.message;

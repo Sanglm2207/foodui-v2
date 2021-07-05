@@ -16,7 +16,6 @@ export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}auth/`;
 
   constructor(
-    private cookie: CookieService,
     private http: HttpClient,
     private router: Router,
   ) {

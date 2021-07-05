@@ -13,9 +13,8 @@
     <nb-action>
       <ngx-selector-language></ngx-selector-language>
     </nb-action>
-    <nb-action class="user-action" *nbIsGranted="['view', 'user']">
-      <nb-user [nbContextMenu]="userMenu" [onlyPicture]="userPictureOnly" [name]="user?.name" [picture]="user?.picture">
-      </nb-user>
+    <nb-action class="user-action">
+      <nb-user [nbContextMenu]="userMenu" [name]="user?.email" ></nb-user>
     </nb-action>
   </nb-actions>
 </div>

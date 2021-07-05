@@ -10,8 +10,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://33a83ddadb19.ngrok.io/api/',
+  apiUrl: 'http://localhost:2021/api/',
   serverUrl: {
-     baseUrl: 'https://33a83ddadb19.ngrok.io/api/',
+     baseUrl: 'http://localhost:2021/api/',
   },
 };

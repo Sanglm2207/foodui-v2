@@ -1,38 +1,29 @@
-<div class="row">
-    <div class="col-xxl-5">
-        <div class="row">
-            <div class="col-md-6">
-                <ngx-profit-card></ngx-profit-card>
-            </div>
-            <div class="col-md-6">
-                <ngx-earning-card></ngx-earning-card>
-            </div>
-        </div>
-
-        <ngx-traffic-reveal-card></ngx-traffic-reveal-card>
-    </div>
-
-    <div class="col-xxl-7">
-        <ngx-charts></ngx-charts>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xxl-9">
-        <ngx-country-orders></ngx-country-orders>
-    </div>
-
-    <div class="col-xxl-3">
-        <ngx-progress-section></ngx-progress-section>
-    </div>
-</div>
+<!-- <div class="p-grid">
+  <div class="p-col-12 p-md-6 p-lg-3 overview-box-1">
+    <p-card>
+      Tổng số dơn hàng bán được trong 1 ngày<h1>99</h1>
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-6 p-lg-3 overview-box-1">
+    <p-card>
+      Tổng số món ăn đang kinh doanh<h1>12</h1>
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-6 p-lg-3 overview-box-1">
+    <p-card>
+      Doanh thu của nhà hàng trong 1 tháng<h1>68.000 USD</h1>
+    </p-card>
+  </div>
+  <div class="p-col-12 p-md-6 p-lg-3 overview-box-1">
+    <p-card>
+      Chi phí Marketing 3 tháng gần nhất<h1>2000 USD</h1>
+    </p-card>
+  </div>
+</div> -->
 
 <div class="row">
-    <div class="col-xxl-9">
-        <ngx-visitors-analytics></ngx-visitors-analytics>
-    </div>
-
-    <div class="col-xxl-3">
-        <ngx-user-activity></ngx-user-activity>
-    </div>
+  <div class="col-md-12">
+    <div echarts [options]="barChart" class="nf-chart"></div>
+  </div>
 </div>
+

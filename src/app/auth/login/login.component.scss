@@ -22,14 +22,17 @@
     border-radius: 10px;
     cursor: pointer;
     border: 1px solid #E0E0E0;
+
     &:hover {
         background-color: #EEEEEE
     }
+
     .fa-google-plus-g {
         color: #df4b37;
         padding: 10px 12px;
         font-size: 20px;
     }
+
     .fa-facebook-square {
         color: #3b5998;
         padding: 10px 15px;
@@ -91,81 +94,21 @@ button:focus {
     cursor: pointer
 }
 
+
 .links a {
     margin-left: 4px;
 }
+
+
 
 @media screen and (max-width: 991px) {
     .card1 {
         border-bottom-left-radius: 0px;
         border-top-right-radius: 20px
     }
+
     .card2 {
         border-bottom-left-radius: 20px;
         border-top-right-radius: 0px
-    }
-}
-
-.login__card {
-    width: 70%;
-    margin-left: 20rem;
-    margin-top: 20rem;
-    height: 55%;
-    position: fixed;
-    // overflow-x: hidden;
-    // background-color: green;
-    &__image {
-        border-color: white;
-        margin-top: 1rem;
-        left: 0;
-        h3 {
-            margin-left: 20rem;
-            margin-top: 1rem;
-            font-size: 3rem;
-            color: black;
-        }
-        img {
-            width: 50%;
-            margin-top: 1rem;
-        }
-    }
-    // width: 50%;
-    &__form {
-        width: 50%;
-        margin-left: 80rem;
-        margin-top: -25rem;
-        margin-bottom: 25rem;
-        // background-color: white;
-        &__title {
-            margin-left: -12rem;
-            font-size: 3rem;
-        }
-        &__user {
-            margin-left: -25rem;
-            margin-top: -29rem
-        }
-        &__password {
-            margin-left: -25rem;
-            margin-top: -29rem
-        }
-        // margin-top: 10rem;
-        // margin-top: -20rem;
-        &__input {
-            width: 30%;
-            margin-left: 7.5rem;
-            margin-top: 1.5em;
-            color: black;
-            height: 4rem;
-            // margin-left: -10rem;
-            // margin-top: -20rem;
-            background-color: orange;
-        }
-        &__button {
-            width: 45%;
-            margin-left: 63rem;
-            margin-top: -45rem;
-            height: 4rem;
-            font-size: 1rem;
-        }
     }
 }

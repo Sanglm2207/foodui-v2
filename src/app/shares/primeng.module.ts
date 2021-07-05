@@ -24,6 +24,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TagModule } from 'primeng/tag';
 import { PanelModule } from 'primeng/panel';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+
 
 const modules = [
     DropdownModule,
@@ -49,7 +51,8 @@ const modules = [
     TagModule,
     PanelModule,
     ConfirmDialogModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DynamicDialogModule
 ];
 
 @NgModule({

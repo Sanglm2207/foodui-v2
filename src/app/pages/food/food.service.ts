@@ -24,4 +24,8 @@ export class FoodService {
   createFood(food: Food): Observable<Food[]>  {
     return this.http.post<Food[]>(this.baseUrl + 'createFood', food);
   }
+
+  editFood(food: Food, id: number): Observable<Food[]> {
+    return this.http.put<Food[]>(this.baseUrl + 'editFood/' + id, food);
+  }
 }

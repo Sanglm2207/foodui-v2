@@ -1,38 +1,45 @@
-<div class="card2 card border-0 px-4 px-sm-5 py-5 login__card">
-    <div class="login__card__image">
-        <h3>Mfood</h3>
-        <img src="../../../assets/images/World_map_green.png" alt="" />
-
-    </div>
-
-    <form [formGroup]="form" class="login__card__form">
-        <h3 class="mb-1 login__card__form__title" style="margin-left: -12rem; font-size: 3rem; margin-top: -4.1rem; margin-bottom: 4rem;">{{ "title.login" | translate }}</h3>
-        <div class="row px-3 mt-3 login__card__form__user">
-            <input formControlName="username" class="mb-1 login__card__form__input" name="username" placeholder="Username" />
+<div class="card2 card border-0 px-4 px-sm-5 py-5">
+    <h3 class="mb-1">{{'title.login' | translate}}</h3>
+    <form [formGroup]="form">
+        <div class="row px-3 mt-3">
+            <label class="mb-0">
+                <h6 class="mb-0 text-sm required">{{ "title.username" | translate }}</h6>
+            </label>
+            <input type="text" formControlName="username" class="mb-1" name="email" placeholder="john.doe@email.com">
             <small *ngIf="f['username'].errors?.required && isSubmitted" class="text-danger">
-        {{ "title.username.required" | translate }}
-      </small>
+                {{'title.username.required' | translate}}
+            </small>
         </div>
-        <div class="row px-3 my-4 login__card__form__password">
-            <input type="password" name="password" formControlName="password" class="mb-1 login__card__form__input" placeholder="Password" />
+        <div class="row px-3 my-4">
+            <label class="mb-0">
+                <h6 class="mb-0 text-sm required">{{'title.password.name' | translate}}</h6>
+            </label>
+            <input type="password" name="password" formControlName="password" class="mb-1"
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
             <small *ngIf="f['password'].errors?.required && isSubmitted" class="text-danger">
-        {{ "title.password.required" | translate }}
-      </small>
+                {{'title.password.required' | translate}}
+            </small>
         </div>
     </form>
     <div class="row mb-4">
-        <div class="col-md-6">
-            <button class="btn btn-blue text-center mb-1 py-2 login__card__form__button" (click)="onSubmit()">
-        {{ "title.login.submit" | translate }}
-      </button>
+        <div class="col-md-12">
+            <button class="btn btn-blue text-center mb-1 py-2" (click)="onSubmit()">{{'title.login.submit' |
+                translate}}</button>
         </div>
     </div>
-
-    <!-- <div class="row px-3 mb-4">
+    <div class="row mb-4 flex-column justify-content-center">
+        <div class="d-flex justify-content-center">
+            <a href="#">
+                {{'title.account.forgot' | translate}}
+            </a>
+        </div>
+    </div>
+    <div class="row px-3 mb-4">
         <div class="line"></div>
         <small class="text-muted or text-center">{{'title.or' | translate}}</small>
         <div class="line"></div>
-    </div> -->
+    </div>
+    
 </div>
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="square-jelly-box">
     <p style="font-size: 20px; color: white">Loading...</p>

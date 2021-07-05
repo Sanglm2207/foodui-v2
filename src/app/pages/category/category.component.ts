@@ -76,17 +76,42 @@ export class CategoryComponent implements OnInit {
   }
 
   saveCategory() {
-    this.categoryService.createCategory(this.category)
-      .subscribe(
-        data => {
-          this.toastr.success('Thêm mới thành công');
-          this.getAllCategories();
-          this.displayModal = false;
-        },
-        error => {
-          console.log(error);
-          this.toastr.error('Thêm mới thất bại !');
+    this.submitted = true;
+
+    if (this.category.name.trim()) {
+        if (this.category.id) {
+            this.categories[this.findIndexById(this.category.id)] = this.category;
+            this.categoryService.editCategory(this.category, this.category.id).subscribe(data => {
+              this.toastr.success('Category update successfully !');
+              this.getAllCategories();
+              this.displayModal = false;
+            }
+          );
         }
-      );
+        else {
+          this.categoryService.createCategory(this.category).subscribe(
+            data => {
+              this.toastr.success('Category create successfully !');
+              this.getAllCategories();
+              this.displayModal = false;
+            }
+          );
+        }
+        this.categories = [...this.categories];
+        this.categoryDialog = false;
+        this.category = {};
   }
+
+}
+
+findIndexById(id: number): number {
+  let index = -1;
+  for (let i = 0; i < this.categories.length; i++) {
+      if (this.categories[i].id === id) {
+          index = i;
+          break;
+      }
+  }
+  return index;
+}
 }

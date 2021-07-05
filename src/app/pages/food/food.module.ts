@@ -4,6 +4,7 @@ import { FoodComponent } from './food.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {SharesModule} from '../../shares/shares.module';
+import { DialogService } from 'primeng/dynamicdialog';
 
 const routes: Routes = [
   {
@@ -19,6 +20,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharesModule,
   ],
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService, DialogService ],
 })
 export class FoodModule { }

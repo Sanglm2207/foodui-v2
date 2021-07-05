@@ -98,8 +98,6 @@ export class TableComponent implements OnInit {
               this.toastr.success('Table update successfully !');
               this.getAllTables();
               this.displayModal = false;
-            }, error => {
-              this.toastr.error('Table update failed !');
             })
         }
         else {
@@ -108,12 +106,7 @@ export class TableComponent implements OnInit {
               this.toastr.success('Thêm mới thành công');
               this.getAllTables();
               this.displayModal = false;
-            },
-            error => {
-              console.log(error);
-              this.toastr.error('Thêm mới thất bại !');
-            }
-          );
+            });
         }
         this.tables = [...this.tables];
         this.tableDialog = false;

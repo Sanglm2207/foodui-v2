@@ -1,9 +1,10 @@
-import { Customer } from "./customer.model";
+import { Food } from "./food.model";
 
 export class Order {
     id?: number;
-    discount?: number;
-    totalPrice?: number;
     orderTime?: number;
-    customer: Customer;
+    totalPrice?: number;
+    food?: Food;
+    status?: Boolean;
+    
 }

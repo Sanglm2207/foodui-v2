@@ -8,35 +8,65 @@
         <div class="card">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" ></button>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search..." />
+                        </span>
+                    </div>
                 </ng-template>
 
                 <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export"  icon="pi pi-upload" class="p-button-help"></button>
+                    <!-- <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-success p-mr-2"
+                        [disabled]="!selectedOrders || !selectedOrders.length"
+                        (click)="exportSelectedProducts()"></button> -->
+                    <button pButton pRipple label="Export All" icon="pi pi-upload" class="p-button-help"
+                        (click)="exportExcel()"></button>
                 </ng-template>
             </p-toolbar>
 
-            <p-table #dt [value]="orders" [rows]="10" [paginator]="true"
-                [(selection)]="selectedOrders" [rowHover]="true" dataKey="id"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-                
+            <p-table #dt [value]="orders" [rows]="5" [paginator]="true" [(selection)]="selectedOrders" [rowHover]="true"
+                dataKey="orderId" [globalFilterFields]="['orderId','customerName']"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+
+
+
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="discount">Discount <p-sortIcon field="description"></p-sortIcon></th>
-                        <th pSortableColumn="totalPrice">Total Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="orderTime">Time <p-sortIcon field="quantity"></p-sortIcon></th>
-                        <th pSortableColumn="customer">Customer <p-sortIcon field="status"></p-sortIcon></th>
+                        <!-- <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th> -->
+                        <th pSortableColumn="orderId">Mã đơn hàng <p-sortIcon field="orderId"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="customerName">Tên khách hàng <p-sortIcon field="customerName"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="customerPhone">Số điện thoại <p-sortIcon field="customerPhone">
+                            </p-sortIcon>
+                        </th>
+                        <th pSortableColumn="numberInParty">Số người tham dự <p-sortIcon field="numberInParty">
+                            </p-sortIcon>
+                        </th>
+                        <th pSortableColumn="notes">Ghi chú <p-sortIcon field="notes">
+                            </p-sortIcon>
+                        </th>
+                        <th pSortableColumn="orderTime">Thời gian đặt hàng <p-sortIcon field="orderTime"></p-sortIcon>
+                        </th>
+
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-order>
                     <tr>
-                        <td>{{order.name}}</td>
-                        <td>{{order.discount}}</td>
-                        <td>{{order.totalPrice | currency:'VND'}}</td>
-                        <td>{{order.orderTime}}</td>
-                        <td>{{order.customer.name}}</td>
+                        <!-- <td>
+                            <p-tableCheckbox [value]="order"></p-tableCheckbox>
+                        </td> -->
+                        <td>{{order.orderId}}</td>
+                        <td>{{order.customerName}}</td>
+                        <td>{{order.customerPhone}}</td>
+                        <td>{{order.numberInParty}}</td>
+                        <td>{{order.notes}}</td>
+                        <td>{{order.orderTime | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary">
@@ -47,5 +77,5 @@
             </p-table>
         </div>
     </kt-portlet-body>
-</kt-portlet>
 
+</kt-portlet>

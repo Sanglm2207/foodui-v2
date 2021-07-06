@@ -1,11 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from '../../@core/_config/_models/user';
 import { UserService } from './user.service';
-import {Page} from '../../shares/models/page';
-import {DatatableComponent, ColumnMode} from '@swimlane/ngx-datatable';
+import { Page } from '../../shares/models/page';
+import { DatatableComponent, ColumnMode } from '@swimlane/ngx-datatable';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
+import { CryptoService } from '../../@core/services/crypto.service';
+import crypto from 'crypto-js';
+
 
 class PagedData<T> {
   data: T[];
@@ -38,10 +41,11 @@ export class UserComponent implements OnInit {
   submitted: boolean;
 
   constructor(private userService: UserService,
-              private primengConfig: PrimeNGConfig,
-              private toastr: ToastrService,
-              private confirmationService: ConfirmationService) {
-              }
+    private primengConfig: PrimeNGConfig,
+    private toastr: ToastrService,
+    private confirmationService: ConfirmationService,
+    ) {
+  }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -90,44 +94,44 @@ export class UserComponent implements OnInit {
     this.submitted = true;
 
     if (this.user.name.trim()) {
-        if (this.user.id) {
-            this.users[this.findIndexById(this.user.id)] = this.user;
-            this.userService.editUser(this.user, this.user.id).subscribe(data => {
-              this.toastr.success('User update successfully !');
-              this.getAllUsers();
-              this.displayModal = false;
-            }, error => {
-              console.log(error);
-              this.toastr.error('User update failed !');
-            })
-        }
-        else {
-          this.userService.createUser(this.user).subscribe(
-            data => {
-              this.toastr.success('User create successfully !');
-              this.getAllUsers();
-              this.displayModal = false;
-            },
-            error => {
-              console.log(error);
-              this.toastr.error('User create failed !');
-            }
-          );
-        }
-        this.users = [...this.users];
-        this.userDialog = false;
-        this.user = {};
+      if (this.user.id) {
+        this.users[this.findIndexById(this.user.id)] = this.user;
+        this.userService.editUser(this.user, this.user.id).subscribe(data => {
+          this.toastr.success('User update successfully !');
+          this.getAllUsers();
+          this.displayModal = false;
+        }, error => {
+          console.log(error);
+          this.toastr.error('User update failed !');
+        })
+      }
+      else {
+        this.userService.createUser(this.user).subscribe(
+          data => {
+            this.toastr.success('User create successfully !');
+            this.getAllUsers();
+            this.displayModal = false;
+          },
+          error => {
+            console.log(error);
+            this.toastr.error('User create failed !');
+          }
+        );
+      }
+      this.users = [...this.users];
+      this.userDialog = false;
+      this.user = {};
     }
-    
+
   }
 
   findIndexById(id: number): number {
     let index = -1;
     for (let i = 0; i < this.users.length; i++) {
-        if (this.users[i].id === id) {
-            index = i;
-            break;
-        }
+      if (this.users[i].id === id) {
+        index = i;
+        break;
+      }
     }
     return index;
   }

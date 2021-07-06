@@ -1,37 +1,27 @@
 <p-toast></p-toast>
 
 <kt-portlet>
-  <kt-portlet-header
-    [icon]="'pi pi-align-justify'"
-    [class]="'d-flex flex-row'"
-    [title]="'title.user.listUser' | translate"
-  >
+  <kt-portlet-header [icon]="'pi pi-align-justify'" [class]="'d-flex flex-row'"
+    [title]="'title.user.listUser' | translate">
   </kt-portlet-header>
   <kt-portlet-body>
     <div class="card">
       <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-          <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
-            chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+          <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+            class="p-mr-2 p-d-inline-block"></p-fileUpload>
           <!-- <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
         </ng-template>
       </p-toolbar>
 
-      <p-table
-        #dt
-        [value]="users"
-        [rows]="10"
-        [paginator]="true"
-        [(selection)]="selectedUsers"
-        [rowHover]="true"
-        dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [showCurrentPageReport]="true"
-      >
+      <p-table #dt [value]="users" [rows]="10" [paginator]="true" [(selection)]="selectedUsers" [rowHover]="true"
+        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="username">
@@ -70,7 +60,7 @@
               <span *ngIf="user.status === true">
                 <p-tag styleClass="p-mr-2" value="Active" [rounded]="true"></p-tag>
               </span>
-              
+
               <span *ngIf="user.status === false">
                 <p-tag severity="danger" value="Locked" [rounded]="true"></p-tag>
               </span>
@@ -79,7 +69,7 @@
               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                 (click)="editUser(user)"></button>
               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                (click)="deleteUser(user)" ></button>
+                (click)="deleteUser(user)"></button>
             </td>
           </tr>
         </ng-template>
@@ -91,50 +81,53 @@
       </p-table>
     </div>
 
-    <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm mới người dùng" [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-            <div class="p-field">
-              <label for="name">Fullname</label>
-              <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
-            </div>
-              
-            <div class="p-formgrid p-grid">
-              <div class="p-field p-col">
-                  <label for="username">Username</label>
-                  <input type="text" pInputText id="username" [(ngModel)]="user.username" required autofocus />
-              </div>
-              <div class="p-field p-col">
-                  <label for="password">Password</label>
-                  <input type="password" pInputText id="password" [(ngModel)]="user.password" required autofocus />
-              </div>
-            </div>
-            <div class="p-formgrid p-grid">
-              <div class="p-field p-col">
-                  <label for="email">Email</label>
-                  <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus />
-              </div>
-              <div class="p-field p-col">
-                  <label for="phoneNumber">Phone</label>
-                  <input type="text" pInputText id="phoneNumber" [(ngModel)]="user.phoneNumber" required autofocus />
-              </div>
-            </div>
+    <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Thêm mới người dùng" [modal]="true"
+      styleClass="p-fluid">
+      <ng-template pTemplate="content">
+        <div class="p-field">
+          <label for="name">Fullname</label>
+          <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
+        </div>
 
-            <div class="p-formgrid p-grid">
-                <div class="p-field p-col">
-                    <label for="birthday">Birthday</label>
-                    <p-calendar [(ngModel)]="user.birthday" [showIcon]="true" inputId="birthday" required></p-calendar>
-                </div>
-                <div class="p-field p-col">
-                    <label for="address">Address</label>
-                    <input type="text" pInputText id="address" [(ngModel)]="user.address" required autofocus />
-                </div>
-            </div>
-        </ng-template>
-        
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
-        </ng-template>
+        <div class="p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="username">Username</label>
+            <input type="text" pInputText id="username" [(ngModel)]="user.username" required autofocus />
+          </div>
+          <div class="p-field p-col">
+             <label for="password">Password</label>
+               <!--   <input type="password" pInputText id="password" [(ngModel)]="user.password" required autofocus /> -->
+            <p-password [(ngModel)]="user.password" [toggleMask]="true"></p-password>
+
+          </div>
+        </div>
+        <div class="p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="email">Email</label>
+            <input type="text" pInputText id="email" [(ngModel)]="user.email" required autofocus />
+          </div>
+          <div class="p-field p-col">
+            <label for="phoneNumber">Phone</label>
+            <input type="text" pInputText id="phoneNumber" [(ngModel)]="user.phoneNumber" required autofocus />
+          </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="birthday">Birthday</label>
+            <p-calendar [(ngModel)]="user.birthday" [showIcon]="true" inputId="birthday" required></p-calendar>
+          </div>
+          <div class="p-field p-col">
+            <label for="address">Address</label>
+            <input type="text" pInputText id="address" [(ngModel)]="user.address" required autofocus />
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
+      </ng-template>
     </p-dialog>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

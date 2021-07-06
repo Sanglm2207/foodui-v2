@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
     xAxis: [
       {
         type: "category",
-        data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Đec"],
+        data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
         axisTick: {
           alignWithLabel: true
         }
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
             }
           }
         },
-        data: [10, 52, 200, 334, 390, 330, 220, 1000, 500, 444, 999, 11]
+        data: [10, 52, 200, 334, 390, 330, 990]
       }
     ]
   };

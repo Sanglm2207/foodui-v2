@@ -74,17 +74,14 @@
     </div>
 
 
-    <p-dialog [(visible)]="tableDialog" [style]="{width: '450px'}" header="Thêm mới bàn ăn" [modal]="true"
-      styleClass="p-fluid">
-      <form #f="ngForm">
+ 
+    <p-dialog appendTo="body" [(visible)]="tableDialog" modal="modal" [style]="{width: '450px'}"  header="Thêm mới bàn ăn"
+      [closable]="true" [showHeader]="true"  styleClass="p-fluid">
+
         <ng-template pTemplate="content">
           <div class="p-field">
             <label for="tableNumber">Name</label>
-            <input type="text" pInputText id="tableNumber" [(ngModel)]="table.tableNumber"
-              [ngClass]="{ 'is-invalid': f.submitted && tableNumber.invalid }" required />
-            <div *ngIf="f.submitted && tableNumber.invalid" class="invalid-feedback">
-              <div *ngIf="tableNumber.errors.required">table Number is required</div>
-            </div>
+            <input type="text" pInputText id="tableNumber" [(ngModel)]="table.tableNumber" required />
 
           </div>
           <div class="p-field">
@@ -116,8 +113,6 @@
             (click)="hideDialog()"></button>
           <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
         </ng-template>
-
-      </form>
     </p-dialog>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

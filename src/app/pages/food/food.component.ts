@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -27,6 +29,8 @@ export class FoodComponent implements OnInit {
   categories: Category[];
 
   ref: DynamicDialogRef;
+
+  foodForm: FormGroup;
   
   constructor(private foodService: FoodService,
     private categoryService: CategoryService,
@@ -34,13 +38,29 @@ export class FoodComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private toastr: ToastrService,
     public messageService: MessageService,
-    public dialogService: DialogService) { }
+    public dialogService: DialogService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllFoods();
     this.primengConfig.ripple = true;
     this.getAllCategories();
+    //this.initForm();
   }
+
+  // public initForm() {
+  //   this.foodForm = new FormGroup({
+  //     id: new FormControl(),
+  //     name: new FormControl(),
+  //     imageURL: new FormControl(),
+  //     description: new FormControl(),
+  //     price: new FormControl(),
+  //     category: new FormGroup({
+  //       id: new FormControl(),
+  //       name: new FormControl()
+  //     }),
+  //   });
+  // }
 
   public getAllFoods(): void {
     this.foodService.getAllFoods().subscribe(data => {
@@ -48,13 +68,15 @@ export class FoodComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
+  } 
 
   public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe(data => {
       this.categories = data;
     })
   }
+
+
 
   openNew() {
     this.food = {};

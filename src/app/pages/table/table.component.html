@@ -1,37 +1,27 @@
 <p-toast></p-toast>
 
 <kt-portlet>
-  <kt-portlet-header
-    [icon]="'pi pi-align-justify'"
-    [class]="'d-flex flex-row'"
-    [title]="'title.table.listTable' | translate"
-  >
+  <kt-portlet-header [icon]="'pi pi-align-justify'" [class]="'d-flex flex-row'"
+    [title]="'title.table.listTable' | translate">
   </kt-portlet-header>
   <kt-portlet-body>
     <div class="card">
       <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
-          <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
-            chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+          <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
+            chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
           <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
         </ng-template>
       </p-toolbar>
 
-      <p-table
-        #dt
-        [value]="tables"
-        [rows]="5"
-        [paginator]="true"
-        [(selection)]="selectedTables"
-        [rowHover]="true"
-        dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [showCurrentPageReport]="true"
-      >
+      <p-table #dt [value]="tables" [rows]="5" [paginator]="true" [(selection)]="selectedTables" [rowHover]="true"
+        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="tableNumber">
@@ -62,7 +52,7 @@
               <span *ngIf="table.status === true">
                 <p-tag severity="danger" value="Đã đặt" [rounded]="true"></p-tag>
               </span>
-              
+
               <span *ngIf="table.status === false">
                 <p-tag styleClass="p-mr-2" value="Còn trống" [rounded]="true"></p-tag>
               </span>
@@ -71,7 +61,7 @@
               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                 (click)="editProduct(table)"></button>
               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                (click)="deleteProduct(table)" ></button>
+                (click)="deleteProduct(table)"></button>
             </td>
           </tr>
         </ng-template>
@@ -84,41 +74,50 @@
     </div>
 
 
-<p-dialog [(visible)]="tableDialog" [style]="{width: '450px'}" header="Thêm mới bàn ăn" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="p-field">
+    <p-dialog [(visible)]="tableDialog" [style]="{width: '450px'}" header="Thêm mới bàn ăn" [modal]="true"
+      styleClass="p-fluid">
+      <form #f="ngForm">
+        <ng-template pTemplate="content">
+          <div class="p-field">
             <label for="tableNumber">Name</label>
-            <input type="text" pInputText id="tableNumber" [(ngModel)]="table.tableNumber" required autofocus />
-        </div>
-         <div class="p-field">
+            <input type="text" pInputText id="tableNumber" [(ngModel)]="table.tableNumber"
+              [ngClass]="{ 'is-invalid': f.submitted && tableNumber.invalid }" required />
+            <div *ngIf="f.submitted && tableNumber.invalid" class="invalid-feedback">
+              <div *ngIf="tableNumber.errors.required">table Number is required</div>
+            </div>
+
+          </div>
+          <div class="p-field">
             <label for="seating">Seating</label>
             <p-inputNumber id="seating" [(ngModel)]="table.seating"></p-inputNumber>
-        </div>
+          </div>
 
-        <div class="p-formgrid p-grid">
+          <div class="p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="location">Location</label>
-                <input type="text" pInputText id="location" [(ngModel)]="table.location" required autofocus />
+              <label for="location">Location</label>
+              <input type="text" pInputText id="location" [(ngModel)]="table.location" required autofocus />
             </div>
             <div class="p-field p-col">
-                <label for="posivition">Posivition</label>
-                <input type="text" pInputText id="posivition" [(ngModel)]="table.posivition" required autofocus />
+              <label for="posivition">Posivition</label>
+              <input type="text" pInputText id="posivition" [(ngModel)]="table.posivition" required autofocus />
             </div>
-        </div>
+          </div>
 
-        <div class="p-field">
-          <label for="status">Status</label> <br>
-          <p-inputSwitch [(ngModel)]="table.status"></p-inputSwitch>
-        </div>
-          
-       
-    </ng-template>
-    
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
-    </ng-template>
-</p-dialog>
+          <div class="p-field">
+            <label for="status">Status</label> <br>
+            <p-inputSwitch [(ngModel)]="table.status"></p-inputSwitch>
+          </div>
 
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="hideDialog()"></button>
+          <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTable()"></button>
+        </ng-template>
+
+      </form>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

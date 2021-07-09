@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { OrderDetail } from '../../@core/_config/_models/OrderDetail';
 import { fadeIn } from '../../shares/animations/fade-in';
-import Color from "../../shares/utils/color.util";
 import { DashboardService } from './dashboard.service';
-
-interface Book {
-  name: string;
-  author: string;
-}
-
 
 @Component({
   selector: 'ngx-dashboard',
@@ -20,78 +12,65 @@ interface Book {
 export class DashboardComponent implements OnInit {
 
 
-  analysisOrder = []; 
+  analysisOrder: any[];
 
-  constructor(private translate: TranslateService,
-              private dashboardService: DashboardService) { 
+  analysisPrice: any[];
 
-  }
+  view: any[] = [700, 400];
+  
+  constructor(
+    private translate: TranslateService,
+    private dashboardService: DashboardService,
+    private cdk: ChangeDetectorRef
+  ) { }
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  legendTitle = 'Tháng';
+  animations = true
+  showXAxisLabel = true;
+  xAxisLabel = 'Doanh số thu được của nhà hàng theo tháng';
+  showYAxisLabel = true;
+  yAxisLabel = 'Mức doanh thu (VND)';
+
+  colorScheme = {
+    domain: [
+      '#EC407A',
+      '#AB47BC',
+      '#42A5F5',
+      '#7E57C2',
+      '#66BB6A',
+      '#FFCA28',
+      '#26A69A'
+    ],
+  };
 
   ngOnInit(): void {
     this.getAnalysisOrderByMonth();
+    this.getTotalPriceByCustomerForMonth();
   }
 
+  onSelect(event) {
+    console.log(event);
+  }
 
   public getAnalysisOrderByMonth() {
     this.dashboardService.getAnalysisOrderByMonth().subscribe(data => {
       this.analysisOrder = data;
       console.log(this.analysisOrder);
-      
+
     })
   }
 
-  public barChart = {
-    title: {
-      text: "Doanh thu của nhà hàng theo tháng",
-      subtext: "FKC Food",
-      x: "center"
-    },
-    color: Color.baseColor,
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: "shadow"        // 默认为直线，可选为："line" | "shadow"
-      },
-      formatter: "Revenue in {b} reached {a}:{c}"
-    },
-    grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "3%",
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: "category",
-        data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Đec"],
-        axisTick: {
-          alignWithLabel: true
-        }
-      }
-    ],
-    yAxis: [
-      {
-        type: "value"
-      }
-    ],
-    series: [
-      {
-        name: "",
-        type: "bar",
-        barWidth: "60%",
-        itemStyle: {
-          normal: {
-            color: params => {
-              const color = Color.genColor(this.barChart.series[0].data);
-              return color[params.dataIndex];
-            }
-          }
-        },
-        data: [10, 52, 200, 334, 390, 330, 220, 1000, 500, 444, 999, 11]
-      }
-    ]
-  };
+  public getTotalPriceByCustomerForMonth() {
+    this.dashboardService.getTotalPriceByCustomer().subscribe(data => {
+      this.analysisPrice = data;
+      console.log(this.analysisPrice);
 
-  
+    })
+  }
 
 }

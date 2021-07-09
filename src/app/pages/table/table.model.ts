@@ -4,4 +4,5 @@ export class Table {
     location?: string;
     posivition?: string;
     seating?: number;
+    status?: Boolean;
 }

@@ -71,11 +71,17 @@
 
         <p-dialog [(visible)]="foodDialog" [style]="{width: '450px'}" header="Food Details" [modal]="true"
             styleClass="p-fluid">
+
             <ng-template pTemplate="content">
                 <div class="p-field">
                     <label for="name">Name</label>
                     <input type="text" pInputText id="name" [(ngModel)]="food.name" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !food.name">Name is required.</small>
+                    <div *ngIf="!name?.valid && (name?.dirty || name?.touched)">
+                        Invalid Name
+                        <small *ngIf="name.errors.required">
+                            Tên món ăn không được để trống
+                        </small>
+                    </div>
                 </div>
                 <div class="p-field">
                     <label for="description">Description</label>
@@ -87,9 +93,18 @@
                     <label class="p-mb-3">Category</label>
                     <div class="p-formgrid p-grid">
                         <div class="p-field-radiobutton p-col-6">
-                            <p-dropdown [options]="categories" [(ngModel)]="food.category" optionLabel="name"></p-dropdown>
+                            <p-dropdown [options]="categories" [(ngModel)]="category" optionLabel="name"
+                                placeholder="Chọn một danh mục">
+                                <ng-template let-category pTemplate="item">
+                                    <div class="category-item">
+                                        <div>{{category.name}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+
                         </div>
                     </div>
+
                 </div>
 
                 <div class="p-field">

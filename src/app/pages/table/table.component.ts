@@ -35,6 +35,8 @@ export class TableComponent implements OnInit {
 
   statuses: any[];
 
+  existingNameList: any = [];
+
   constructor(private tableService: TableService,
     private primengConfig: PrimeNGConfig,
     private toastr: ToastrService,
@@ -53,6 +55,9 @@ export class TableComponent implements OnInit {
   public getAllTables(): void {
     this.tableService.getListTable().subscribe(data => {
       this.tables = data;
+      for (let item in data) {
+        this.existingNameList.push(data[item].tableNumber);
+      }
     }, error => {
       console.log(error);
     });

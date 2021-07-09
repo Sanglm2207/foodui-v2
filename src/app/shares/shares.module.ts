@@ -9,12 +9,14 @@ import { MaterialModule } from './material.module';
 import { PrimengModule } from './primeng.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { TrendModule } from 'ngx-trend';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const modules = [
   CommonModule,
   PortletModule,
   TranslateModule,
   NgxSpinnerModule,
+  NgxChartsModule,
   ReactiveFormsModule,
   HttpClientModule,
   FormsModule,

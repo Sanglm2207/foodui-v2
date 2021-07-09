@@ -25,6 +25,8 @@ import { TagModule } from 'primeng/tag';
 import { PanelModule } from 'primeng/panel';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {PasswordModule} from 'primeng/password';
+import {ChartModule} from 'primeng/chart';
 
 
 const modules = [
@@ -52,8 +54,10 @@ const modules = [
     PanelModule,
     ConfirmDialogModule,
     InputSwitchModule,
-    DynamicDialogModule
-];
+    DynamicDialogModule,
+    PasswordModule,
+    ChartModule
+]
 
 @NgModule({
     imports: [...modules],

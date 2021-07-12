@@ -9,7 +9,7 @@
       <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
           <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-            (click)="openNew()"></button>
+            (click)="processSave($event)"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
@@ -59,7 +59,7 @@
             </td>
             <td>
               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                (click)="editProduct(table)"></button>
+                (click)="processEdit(table)"></button>
               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                 (click)="deleteProduct(table)"></button>
             </td>

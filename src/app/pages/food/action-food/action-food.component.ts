@@ -46,8 +46,6 @@ export class ActionFoodComponent implements OnInit {
         status: [true, Validators.required],
       });
     } else {
-      console.log(this.food);
-      
       this.formFood = this.fb.group({
         id: [this.food.id],
         name: [this.food.name, Validators.required],
@@ -75,13 +73,11 @@ export class ActionFoodComponent implements OnInit {
     
       const categoryObject = this.categories.find(data  => data.id === this.formFood.value.category);
       const data = {...this.formFood.value, ...{category: categoryObject}};
-      console.log('data', data);
       
       if (this.action) {
         this.foodService.createFood(data).subscribe(
           data => {
             this.toastr.success('Thêm mới thành công');
-            // this.findAllFood();
             this.close();
           });
       }
@@ -89,7 +85,6 @@ export class ActionFoodComponent implements OnInit {
         
           this.foodService.editFood(data, this.food.id).subscribe(data => {
             this.toastr.success('Cập nhật thành công !');
-            // this.findAllFood();
             this.close();
           })
       }
@@ -106,18 +101,6 @@ export class ActionFoodComponent implements OnInit {
     this.categoryService.getAllCategories().subscribe(data => {
       this.categories = data;
     })
-  }
-
-  
-  findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.lstFood.length; i++) {
-      if (this.lstFood[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-    return index;
   }
 
 

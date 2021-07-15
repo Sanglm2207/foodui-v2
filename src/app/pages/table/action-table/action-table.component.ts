@@ -24,7 +24,6 @@ export class ActionTableComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private translate: TranslateService,
     private tableService: TableService) { }
 
   ngOnInit(): void {
@@ -36,10 +35,10 @@ export class ActionTableComponent implements OnInit {
     if (this.action) {
       this.formTable = this.fb.group({
         tableNumber: ['', Validators.required],
-        seating: ['',Validators.required],
+        seating: ['', Validators.required],
         location: ['', Validators.required],
         posivition: ['', Validators.required],
-        status: ['', Validators.required],
+        status: [true, Validators.required],
       });
     } else {
       this.formTable = this.fb.group({
@@ -74,23 +73,22 @@ export class ActionTableComponent implements OnInit {
     this.isSubmitted = true;
     if (this.formTable.valid) {
       this.spinner.show();
-      if (this.table.tableNumber.trim()) {
-        if (this.table.id) {
-            this.tableService.editTable(this.table, this.table.id).subscribe(data => {
-              this.toastr.success('Table update successfully !');
-              this.findAll();
-              this.close();
-            })
-        }
-        else {
-          this.tableService.createTable(this.table).subscribe(
-            data => {
-              this.toastr.success('Thêm mới thành công');
-              this.findAll();
-              this.close();
-            });
-        }
-    }
+
+      if (this.action) {
+        this.tableService.createTable(this.formTable.value).subscribe(
+          data => {
+            this.toastr.success('Thêm mới thành công');
+            this.close();
+          });
+
+      }
+      else {
+        this.tableService.editTable(this.formTable.value, this.table.id).subscribe(data => {
+          this.toastr.success('Table update successfully !');
+          this.close();
+        })
+      }
+
     }
   }
 }

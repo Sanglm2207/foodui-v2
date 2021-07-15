@@ -71,13 +71,8 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openNew() {
-    this.table = {};
-    this.submitted = false;
-    this.tableDialog = true;
-  }
 
-  deleteProduct(table: Table) {
+  deleteTable(table: Table) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + table.tableNumber + '?',
       header: 'Confirm',
@@ -91,60 +86,12 @@ export class TableComponent implements OnInit {
     });
   }
 
-  editProduct(table: Table) {
-    this.table = { ...table };
-    this.tableDialog = true;
-  }
-
-  hideDialog() {
-    this.tableDialog = false;
-    this.submitted = false;
-  }
-
-  saveTable() {
-    this.submitted = true;
-
-    if (this.table.tableNumber.trim()) {
-        if (this.table.id) {
-            this.tables[this.findIndexById(this.table.id)] = this.table;
-            this.tableService.editTable(this.table, this.table.id).subscribe(data => {
-              this.toastr.success('Table update successfully !');
-              this.getAllTables();
-              this.displayModal = false;
-            })
-        }
-        else {
-          this.tableService.createTable(this.table).subscribe(
-            data => {
-              this.toastr.success('Thêm mới thành công');
-              this.getAllTables();
-              this.displayModal = false;
-            });
-        }
-        this.tables = [...this.tables];
-        this.tableDialog = false;
-        this.table = {};
-    }
-   
-  }
-
-  findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.tables.length; i++) {
-        if (this.tables[i].id === id) {
-            index = i;
-            break;
-        }
-    }
-    return index;
-  }
-
   processEdit(item: any) {
     const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
     modalRef.componentInstance.action = false;
     modalRef.componentInstance.table = item;
     modalRef.result.then(value => {
-        if (value === 'success') {
+        if (value) {
           this.getAllTables();
         }
       },
@@ -155,7 +102,7 @@ export class TableComponent implements OnInit {
     const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
     modalRef.componentInstance.action = true;
     modalRef.result.then(value => {
-      if (value === 'success') {
+      if (value) {
         this.getAllTables();
       }
     }, (reason) => {

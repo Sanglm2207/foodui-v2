@@ -8,6 +8,10 @@ import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
 import { CryptoService } from '../../@core/services/crypto.service';
 import crypto from 'crypto-js';
+import { MatDialog } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ActionUserComponent } from './action-user/action-user.component';
+import { DEFAULT_MODAL_OPTIONS } from '../../@core/app-config';
 
 
 class PagedData<T> {
@@ -26,12 +30,6 @@ interface City {
 })
 export class UserComponent implements OnInit {
 
-  displayModal: boolean;
-
-  position: string;
-
-  userDialog: boolean;
-
   users: User[];
 
   user: User;
@@ -40,10 +38,14 @@ export class UserComponent implements OnInit {
 
   submitted: boolean;
 
+ 
+
   constructor(private userService: UserService,
     private primengConfig: PrimeNGConfig,
     private toastr: ToastrService,
     private confirmationService: ConfirmationService,
+    public dialog: MatDialog,
+    private modal: NgbModal
     ) {
   }
 
@@ -60,11 +62,6 @@ export class UserComponent implements OnInit {
     });
   }
 
-  openNew() {
-    this.user = {};
-    this.submitted = false;
-    this.userDialog = true;
-  }
 
   deleteUser(user: User) {
     this.confirmationService.confirm({
@@ -75,65 +72,61 @@ export class UserComponent implements OnInit {
         this.userService.deleteUser(user.id).subscribe(data => {
           this.toastr.success("Deleted user successfully!")
           this.getAllUsers();
+          window.location.reload();
         })
       }
     });
   }
 
-  editUser(user: User) {
-    this.user = { ...user };
-    this.userDialog = true;
-  }
 
-  hideDialog() {
-    this.userDialog = false;
-    this.submitted = false;
-  }
-
-  saveTable() {
-    this.submitted = true;
-
-    if (this.user.name.trim()) {
-      if (this.user.id) {
-        this.users[this.findIndexById(this.user.id)] = this.user;
-        this.userService.editUser(this.user, this.user.id).subscribe(data => {
-          this.toastr.success('User update successfully !');
-          this.getAllUsers();
-          this.displayModal = false;
-        }, error => {
-          console.log(error);
-          this.toastr.error('User update failed !');
-        })
+  processEdit(user: any) {
+    const modalRef = this.modal.open(ActionUserComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = false;
+    modalRef.componentInstance.user = user;
+    modalRef.result.then(value => {
+      if (value) {
+        this.getAllUsers();
       }
-      else {
-        this.userService.createUser(this.user).subscribe(
-          data => {
-            this.toastr.success('User create successfully !');
-            this.getAllUsers();
-            this.displayModal = false;
-          },
-          error => {
-            console.log(error);
-            this.toastr.error('User create failed !');
-          }
-        );
-      }
-      this.users = [...this.users];
-      this.userDialog = false;
-      this.user = {};
-    }
-
+    },
+    );
   }
 
-  findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === id) {
-        index = i;
-        break;
+  processSave($event: any) {
+    const modalRef = this.modal.open(ActionUserComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = true;
+    modalRef.result.then(value => {
+      if (value) {
+        this.getAllUsers();
       }
-    }
-    return index;
+    });
   }
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.users);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array"
+      });
+      this.saveAsExcelFile(excelBuffer, "users");
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import("file-saver").then(FileSaver => {
+      let EXCEL_TYPE =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+      let EXCEL_EXTENSION = ".xlsx";
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(
+        data,
+        fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+      );
+    });
+  }
+
 
 }

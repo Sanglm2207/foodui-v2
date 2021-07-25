@@ -78,6 +78,7 @@ export class ActionTableComponent implements OnInit {
         this.tableService.createTable(this.formTable.value).subscribe(
           data => {
             this.toastr.success('Thêm mới thành công');
+            this.findAll();
             this.close();
           });
 
@@ -85,6 +86,7 @@ export class ActionTableComponent implements OnInit {
       else {
         this.tableService.editTable(this.formTable.value, this.table.id).subscribe(data => {
           this.toastr.success('Table update successfully !');
+          this.findAll();
           this.close();
         })
       }

@@ -26,6 +26,7 @@ import { PanelModule } from 'primeng/panel';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {PasswordModule} from 'primeng/password';
+import {ChartModule} from 'primeng/chart';
 
 
 const modules = [
@@ -54,7 +55,8 @@ const modules = [
     ConfirmDialogModule,
     InputSwitchModule,
     DynamicDialogModule,
-    PasswordModule
+    PasswordModule,
+    ChartModule
 ]
 
 @NgModule({

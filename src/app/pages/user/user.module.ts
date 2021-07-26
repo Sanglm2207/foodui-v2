@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharesModule } from '../../shares/shares.module';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import { ActionUserComponent } from './action-user/action-user.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UserComponent,
+    ActionUserComponent,
   ],
   imports: [
     CommonModule,

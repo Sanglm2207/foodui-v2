@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { DEFAULT_MODAL_OPTIONS } from '../../@core/app-config';
+import { ActionTableComponent } from './action-table/action-table.component';
 import { Table } from './table.model';
 import { TableService } from './table.service';
 
@@ -37,10 +40,15 @@ export class TableComponent implements OnInit {
 
   existingNameList: any = [];
 
+  lstDel: any[] = [];
+  total: any;
+  listTable: any[] = [];
+
   constructor(private tableService: TableService,
     private primengConfig: PrimeNGConfig,
     private toastr: ToastrService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private modal: NgbModal) { }
 
   ngOnInit(): void {
     this.getAllTables();
@@ -63,13 +71,8 @@ export class TableComponent implements OnInit {
     });
   }
 
-  openNew() {
-    this.table = {};
-    this.submitted = false;
-    this.tableDialog = true;
-  }
 
-  deleteProduct(table: Table) {
+  deleteTable(table: Table) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + table.tableNumber + '?',
       header: 'Confirm',
@@ -83,51 +86,27 @@ export class TableComponent implements OnInit {
     });
   }
 
-  editProduct(table: Table) {
-    this.table = { ...table };
-    this.tableDialog = true;
+  processEdit(item: any) {
+    const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = false;
+    modalRef.componentInstance.table = item;
+    modalRef.result.then(value => {
+        if (value) {
+          this.getAllTables();
+        }
+      },
+    );
   }
 
-  hideDialog() {
-    this.tableDialog = false;
-    this.submitted = false;
-  }
+  processSave($event: any) {
+    const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = true;
+    modalRef.result.then(value => {
+      if (value) {
+        this.getAllTables();
+      }
+    }, (reason) => {
 
-  saveTable() {
-    this.submitted = true;
-
-    if (this.table.tableNumber.trim()) {
-        if (this.table.id) {
-            this.tables[this.findIndexById(this.table.id)] = this.table;
-            this.tableService.editTable(this.table, this.table.id).subscribe(data => {
-              this.toastr.success('Table update successfully !');
-              this.getAllTables();
-              this.displayModal = false;
-            })
-        }
-        else {
-          this.tableService.createTable(this.table).subscribe(
-            data => {
-              this.toastr.success('Thêm mới thành công');
-              this.getAllTables();
-              this.displayModal = false;
-            });
-        }
-        this.tables = [...this.tables];
-        this.tableDialog = false;
-        this.table = {};
-    }
-   
-  }
-
-  findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.tables.length; i++) {
-        if (this.tables[i].id === id) {
-            index = i;
-            break;
-        }
-    }
-    return index;
+    });
   }
 }

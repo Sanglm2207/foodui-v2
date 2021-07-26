@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SharesModule } from '../../shares/shares.module';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { ActionTableComponent } from './action-table/action-table.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TableComponent],
+  declarations: [TableComponent, ActionTableComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

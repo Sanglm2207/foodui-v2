@@ -9,12 +9,12 @@
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
                     <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-                        (click)="openNew()"></button>
+                        (click)="processSave($event)"></button>
                 </ng-template>
 
                 <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
-                        chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
+                    <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
+                        chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
                     <button pButton pRipple label="Export" (click)="exportExcel()" icon="pi pi-upload"
                         class="p-button-help"></button>
                 </ng-template>
@@ -31,9 +31,9 @@
                         <th>Image</th>
                         <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
                         </th>
                         <th></th>
                     </tr>
@@ -43,19 +43,11 @@
                         <td>{{food.name}}</td>
                         <td><img [src]="food.imageUrl" width="100" class="p-shadow-4" /></td>
                         <td>{{food.description}}</td>
+                        <td>{{ food.category.name}}
                         <td>{{food.price | currency:'VND'}}</td>
                         <td>
-                            <span *ngIf="food.status === true">
-                                <p-tag styleClass="p-mr-2" value="Đang kinh doanh" [rounded]="true"></p-tag>
-                            </span>
-
-                            <span *ngIf="food.status === false">
-                                <p-tag severity="danger" value="Ngừng kinh doanh" [rounded]="true"></p-tag>
-                            </span>
-                        </td>
-                        <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                                (click)="editFood(food)"></button>
+                                (click)="processEdit(food)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                                 (click)="deleteFood(food)"></button>
                         </td>
@@ -68,55 +60,6 @@
                 </ng-template>
             </p-table>
         </div>
-
-        <p-dialog [(visible)]="foodDialog" [style]="{width: '450px'}" header="Food Details" [modal]="true"
-            styleClass="p-fluid">
-            <ng-template pTemplate="content">
-                <div class="p-field">
-                    <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="food.name" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !food.name">Name is required.</small>
-                </div>
-                <div class="p-field">
-                    <label for="description">Description</label>
-                    <textarea id="description" pInputTextarea [(ngModel)]="food.description" required rows="3"
-                        cols="20"></textarea>
-                </div>
-
-                <div class="p-field">
-                    <label class="p-mb-3">Category</label>
-                    <div class="p-formgrid p-grid">
-                        <div class="p-field-radiobutton p-col-6">
-                            <p-dropdown [options]="categories" [(ngModel)]="food.category" optionLabel="name"></p-dropdown>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-field">
-                    <label for="imageURL">Image URI</label>
-                    <input type="text" pInputText id="imageURL" [(ngModel)]="food.imageURL">
-                </div>
-                <div class="p-formgrid p-grid">
-                    <div class="p-field p-col">
-                        <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="food.price" mode="currency" currency="VND">
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col">
-                        <label for="status">Status</label><br>
-                        <p-inputSwitch [(ngModel)]="food.status"></p-inputSwitch>
-                    </div>
-                </div>
-
-            </ng-template>
-
-            <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
-                    (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
-                    (click)="saveFood()"></button>
-            </ng-template>
-        </p-dialog>
 
         <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 

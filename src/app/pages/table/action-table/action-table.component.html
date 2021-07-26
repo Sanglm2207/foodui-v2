@@ -1,0 +1,96 @@
+<div class="modal-header">
+    <h4 *ngIf="action" class="modal-title"
+        style="font-size: medium">
+      {{'Thêm mới bàn ăn'}}
+    </h4>
+    <h4 *ngIf="!action" class="modal-title"
+        style="font-size: medium">
+      {{'Sửa bàn ăn ' + table.tableNumber}}
+  
+    </h4>
+    <button type="button" class="btn shadow-none p-0" aria-label="Close" (click)="close()">
+      <span aria-hidden="true" style="font-size: large">x</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formTable">
+        <div class="p-fluid p-grid">
+            <div class="p-md-6" style="padding: 1rem 0.5rem  !important;">
+                <span class="p-float-label">
+                    <input id="tableNumber"
+                            type="text"
+                            formControlName="tableNumber"
+                            [ngClass]="isSubmitted && f['tableNumber'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                            class="form-control"
+                            pInputText>
+                    <label for="tableNumber" class="required">Tên bàn ăn</label>
+                </span>
+                <small *ngIf="isSubmitted && f['tableNumber'].errors?.required"
+                        class="p-error text-error p-pl-1">
+                    Tên bàn ăn là trường bắt buộc !
+                </small>
+            </div>
+            <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+                <span class="p-float-label">
+                    <input id="seating"
+                            type="number"
+                            formControlName="seating"
+                            [ngClass]="isSubmitted && f['seating'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                            class="form-control"
+                            pInputText>
+                    <label for="seating" class="required">Số người ngồi </label>
+                </span>
+                <small *ngIf="isSubmitted && f['seating'].errors?.required"
+                        class="p-error text-error p-pl-1">
+                    Phải nhập số người ngồi cho bàn này !
+                </small>
+            </div>
+            <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+                <span class="p-float-label">
+                    <input id="location"
+                            type="text"
+                            formControlName="location"
+                            [ngClass]="isSubmitted && f['location'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                            class="form-control"
+                            pInputText>
+                    <label for="location" class="required">Vị trí bàn </label>
+                </span>
+                <small *ngIf="isSubmitted && f['location'].errors?.required"
+                        class="p-error text-error p-pl-1">
+                    Phải nhập thông tin vị trí bàn !
+                </small>
+            </div>
+            <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+                <span class="p-float-label">
+                    <input id="posivition"
+                            type="text"
+                            formControlName="posivition"
+                            [ngClass]="isSubmitted && f['posivition'].errors?.required ? 'ng-dirty ng-invalid': ''"
+                            class="form-control"
+                            pInputText>
+                    <label for="posivition" class="required">Khu vực </label>
+                </span>
+                <small *ngIf="isSubmitted && f['posivition'].errors?.required"
+                        class="p-error text-error p-pl-1">
+                    Phải nhập thông tin khu vực bàn !
+                </small>
+            </div>
+
+            <div class="p-md-6" style="padding: 1rem 0.5rem !important;">
+                <span class="p-float-label">
+                    <p>Trạng thái</p>
+                    <p-inputSwitch  formControlName="status"></p-inputSwitch>
+                    
+                </span>
+            </div>
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer pr-5">
+    <button type="button" class="btn btn-info mr-4" (click)="close()">Close</button>
+    <button type="button" class="btn btn-danger" [disabled]="!formTable.valid"
+            (click)="processSaveOrUpdate()">Save
+    </button>
+  </div>
+  

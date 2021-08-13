@@ -43,7 +43,7 @@ export class ActionFoodComponent implements OnInit {
         imageURL: ['', Validators.required],
         price: ['', Validators.required],
         category: ['', Validators.required],
-        status: [true, Validators.required],
+        status: [null, Validators.required],
       });
     } else {
       this.formFood = this.fb.group({

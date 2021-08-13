@@ -84,6 +84,8 @@ export class ActionFoodComponent implements OnInit {
       else {
         
           this.foodService.editFood(data, this.food.id).subscribe(data => {
+            console.log(data);
+            
             this.toastr.success('Cập nhật thành công !');
             this.close();
           })

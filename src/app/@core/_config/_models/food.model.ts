@@ -7,4 +7,5 @@ export class Food{
     description?: string;
     price?: number;
     category?: Category;
+    status?: boolean;
 }

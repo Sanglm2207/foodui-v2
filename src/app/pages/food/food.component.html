@@ -35,6 +35,8 @@
                         </th>
                         <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
                         </th>
+                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
+                        </th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -45,6 +47,15 @@
                         <td>{{food.description}}</td>
                         <td>{{ food.category.name}}
                         <td>{{food.price | currency:'VND'}}</td>
+                        <td>
+                            <span *ngIf="food.status === true">
+                              <p-tag styleClass="p-mr-2"  value="Đang kinh doanh" [rounded]="true"></p-tag>
+                            </span>
+              
+                            <span *ngIf="food.status === false">
+                              <p-tag severity="danger"  value="Ngừng kinh doanh" [rounded]="true"></p-tag>
+                            </span>
+                          </td>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                                 (click)="processEdit(food)"></button>

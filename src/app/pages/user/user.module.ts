@@ -4,8 +4,8 @@ import { UserComponent } from './user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharesModule } from '../../shares/shares.module';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { ActionUserComponent } from './action-user/action-user.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 const routes: Routes = [
   {
@@ -22,10 +22,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NgxDatatableModule,
     SharesModule,
   ],
-  providers: [ MessageService, ConfirmationService],
+  providers: [ MessageService, ConfirmationService, DialogService],
 
 })
 export class UserModule { }

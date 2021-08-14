@@ -1,9 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { DEFAULT_MODAL_OPTIONS } from '../../@core/app-config';
@@ -79,18 +75,23 @@ export class TableComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.tableService.deleteTable(table.id).subscribe(data => {
-          this.toastr.success("Deleted table successfully!")
-          this.getAllTables();
-          this.refresh();
+          if (table.status === false) {
+            this.toastr.warning("Deleted table failed!")
+          } else {
+            this.toastr.success("Deleted table successfully!")
+            this.getAllTables();
+          }
+          
+          
         })
       }
     });
   }
 
-  processEdit(item: any) {
+  processEdit(table: any) {
     const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
     modalRef.componentInstance.action = false;
-    modalRef.componentInstance.table = item;
+    modalRef.componentInstance.table = table;
     modalRef.result.then(value => {
         if (value) {
           this.getAllTables();
@@ -103,15 +104,12 @@ export class TableComponent implements OnInit {
     const modalRef = this.modal.open(ActionTableComponent, DEFAULT_MODAL_OPTIONS);
     modalRef.componentInstance.action = true;
     modalRef.result.then(value => {
-      if (value) {
-        this.getAllTables();
-      }
-    }, (reason) => {
-
-    });
+        if (value) {
+          this.getAllTables();
+        }
+      },
+    );
   }
 
-  refresh(): void {
-    window.location.reload();
-  }
+
 }

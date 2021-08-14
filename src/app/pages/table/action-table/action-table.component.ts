@@ -38,7 +38,7 @@ export class ActionTableComponent implements OnInit {
         seating: ['', Validators.required],
         location: ['', Validators.required],
         posivition: ['', Validators.required],
-        status: [true, Validators.required],
+        status: [null, Validators.required],
       });
     } else {
       this.formTable = this.fb.group({
@@ -78,19 +78,24 @@ export class ActionTableComponent implements OnInit {
         this.tableService.createTable(this.formTable.value).subscribe(
           data => {
             this.toastr.success('Thêm mới thành công');
-            this.findAll();
             this.close();
+            this.refresh();
           });
 
       }
       else {
         this.tableService.editTable(this.formTable.value, this.table.id).subscribe(data => {
-          this.toastr.success('Table update successfully !');
-          this.findAll();
+          this.toastr.success('Cập nhật thành công!');
+          console.log(data);
           this.close();
+          this.refresh();
         })
       }
 
     }
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

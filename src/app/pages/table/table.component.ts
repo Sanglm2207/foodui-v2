@@ -81,6 +81,7 @@ export class TableComponent implements OnInit {
         this.tableService.deleteTable(table.id).subscribe(data => {
           this.toastr.success("Deleted table successfully!")
           this.getAllTables();
+          this.refresh();
         })
       }
     });
@@ -108,5 +109,9 @@ export class TableComponent implements OnInit {
     }, (reason) => {
 
     });
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

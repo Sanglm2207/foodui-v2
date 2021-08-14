@@ -41,7 +41,7 @@ export class ActionUserComponent implements OnInit {
         birthday: ['', Validators.required],
         phoneNumber: ['', Validators.required],
         address: ['', Validators.required],
-        status: [true, Validators.required],
+        status: [null, Validators.required],
       });
     } else {
       this.formUser = this.fb.group({
@@ -77,6 +77,7 @@ export class ActionUserComponent implements OnInit {
           data => {
             this.toastr.success('Thêm mới thành công');
             this.close();
+            this.refresh();
           });
       }
       else {
@@ -84,9 +85,13 @@ export class ActionUserComponent implements OnInit {
           this.userService.editUser(this.formUser.value, this.user.id).subscribe(data => {
             this.toastr.success('Cập nhật thành công !');
             this.close();
+            this.refresh();
           })
       }
     }
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
 }

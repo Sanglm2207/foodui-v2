@@ -9,7 +9,7 @@
       <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
           <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-            (click)="openNew()"></button>
+            (click)="processSave($event)"></button>
         </ng-template>
 
         <ng-template pTemplate="right">
@@ -49,7 +49,7 @@
             </td>
             <td>
               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                (click)="editCategory(category)"></button>
+                (click)="processEdit(category)"></button>
               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                 (click)="deleteCategory(category)"></button>
             </td>
@@ -64,31 +64,6 @@
     </div>
 
 
-    <p-dialog [(visible)]="categoryDialog" [style]="{width: '450px'}" header="Thêm mới bàn ăn" [modal]="true"
-      styleClass="p-fluid">
-      <ng-template pTemplate="content">
-        <div class="p-field">
-          <label for="name">Name</label>
-          <input type="text" pInputText id="name" [(ngModel)]="category.name" required autofocus />
-        </div>
 
-        <div class="p-field">
-          <label for="status">Status</label><br>
-          <p-inputSwitch [(ngModel)]="category.status"></p-inputSwitch>
-        </div>
-
-        <div class="p-field">
-          <p-selectButton [options]="stateOptions" [(ngModel)]="category.status" optionLabel="label"
-            optionValue="value"></p-selectButton>
-        </div>
-
-
-      </ng-template>
-
-      <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCategory()"></button>
-      </ng-template>
-    </p-dialog>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

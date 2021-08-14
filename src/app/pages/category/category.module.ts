@@ -4,6 +4,7 @@ import { CategoryComponent } from './category.component';
 import { RouterModule, Routes } from '@angular/router';
 import {SharesModule} from '../../shares/shares.module';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ActionCategoryComponent } from './action-category/action-category.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CategoryComponent],
+  declarations: [CategoryComponent, ActionCategoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

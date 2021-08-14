@@ -71,8 +71,10 @@ export class UserComponent implements OnInit {
       accept: () => {
         this.userService.deleteUser(user.id).subscribe(data => {
           this.toastr.success("Deleted user successfully!")
+          console.log(data);
+          
           this.getAllUsers();
-          window.location.reload();
+          //this.refresh();
         })
       }
     });
@@ -127,6 +129,8 @@ export class UserComponent implements OnInit {
       );
     });
   }
-
+  refresh(): void {
+    window.location.reload();
+  }
 
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService, PrimeNGConfig } from 'primeng/api';
+import { DEFAULT_MODAL_OPTIONS } from '../../@core/app-config';
 import { Category } from '../../@core/_config/_models/category.model';
+import { ActionCategoryComponent } from './action-category/action-category.component';
 import { CategoryService } from './category.service';
 
 @Component({
@@ -30,7 +33,8 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private primengConfig: PrimeNGConfig,
               private toastr: ToastrService,
-              private confirmationService: ConfirmationService) { }
+              private confirmationService: ConfirmationService,
+              private modal: NgbModal) { }
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -40,16 +44,10 @@ export class CategoryComponent implements OnInit {
   public getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe(data => {
       this.categories = data;
-    }, error => {
-      console.log(error);
     });
   }
 
-  openNew() {
-    this.category = {};
-    this.submitted = false;
-    this.categoryDialog = true;
-  }
+
 
   deleteCategory(category: Category) {
     this.confirmationService.confirm({
@@ -65,53 +63,28 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  editCategory(category: Category) {
-    this.category = { ...category };
-    this.categoryDialog = true;
-  }
-
-  hideDialog() {
-    this.categoryDialog = false;
-    this.submitted = false;
-  }
-
-  saveCategory() {
-    this.submitted = true;
-
-    if (this.category.name.trim()) {
-        if (this.category.id) {
-            this.categories[this.findIndexById(this.category.id)] = this.category;
-            this.categoryService.editCategory(this.category, this.category.id).subscribe(data => {
-              this.toastr.success('Category update successfully !');
-              this.getAllCategories();
-              this.displayModal = false;
-            }
-          );
+  processEdit(category: any) {
+    const modalRef = this.modal.open(ActionCategoryComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = false;
+    modalRef.componentInstance.category = category;
+    modalRef.result.then(value => {
+        if (value) {
+          this.getAllCategories();
         }
-        else {
-          this.categoryService.createCategory(this.category).subscribe(
-            data => {
-              this.toastr.success('Category create successfully !');
-              this.getAllCategories();
-              this.displayModal = false;
-            }
-          );
+      },
+    );
+  }
+
+  processSave($event: any) {
+    const modalRef = this.modal.open(ActionCategoryComponent, DEFAULT_MODAL_OPTIONS);
+    modalRef.componentInstance.action = true;
+    modalRef.result.then(value => {
+        if (value) {
+          this.getAllCategories();
         }
-        this.categories = [...this.categories];
-        this.categoryDialog = false;
-        this.category = {};
+      },
+    );
   }
 
-}
 
-findIndexById(id: number): number {
-  let index = -1;
-  for (let i = 0; i < this.categories.length; i++) {
-      if (this.categories[i].id === id) {
-          index = i;
-          break;
-      }
-  }
-  return index;
-}
 }

@@ -75,7 +75,7 @@ export class TableComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.tableService.deleteTable(table.id).subscribe(data => {
-          if (table.status === false) {
+          if (table.status === true) {
             this.toastr.warning("Deleted table failed!")
           } else {
             this.toastr.success("Deleted table successfully!")

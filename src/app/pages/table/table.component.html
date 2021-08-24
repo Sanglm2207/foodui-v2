@@ -50,11 +50,12 @@
             <td>{{ table.posivition }}</td>
             <td>
               <span *ngIf="table.status === false">
-                <p-tag severity="danger" value="Đã đặt" [rounded]="true"></p-tag>
+                <p-tag styleClass="p-mr-2" value="Còn trống" [rounded]="true"></p-tag>
+                
               </span>
 
               <span *ngIf="table.status === true">
-                <p-tag styleClass="p-mr-2" value="Còn trống" [rounded]="true"></p-tag>
+                <p-tag severity="danger" value="Đã đặt" [rounded]="true"></p-tag>
               </span>
             </td>
             <td>

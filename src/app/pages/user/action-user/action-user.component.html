@@ -36,7 +36,7 @@
                 </small>
             </div>
 
-            <div class="p-md-6" style="padding: 1rem 0.5rem  !important;">
+            <div class="p-md-6" style="padding: 1rem 0.5rem  !important;" *ngIf="action === true">
                 <span class="p-float-label">
                     <p-password formControlName="password" [toggleMask]="true"></p-password>
                     <label for="password" class="required">Password</label>

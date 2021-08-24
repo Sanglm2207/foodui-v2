@@ -28,7 +28,6 @@ export class ActionTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.findAll();
   }
 
   initForm() {
@@ -38,7 +37,7 @@ export class ActionTableComponent implements OnInit {
         seating: ['', Validators.required],
         location: ['', Validators.required],
         posivition: ['', Validators.required],
-        status: [true, Validators.required],
+        status: [false, Validators.required],
       });
     } else {
       this.formTable = this.fb.group({
@@ -47,13 +46,13 @@ export class ActionTableComponent implements OnInit {
         seating: [this.table.seating, Validators.required],
         location: [this.table.location, Validators.required],
         posivition: [this.table.posivition, Validators.required],
-        status: [true, Validators.required],
+        status: [false, Validators.required],
 
       });
     }
   }
 
- close(status = true) {
+  close(status = true) {
     this.modal.close(status);
   }
 
@@ -62,32 +61,26 @@ export class ActionTableComponent implements OnInit {
   }
 
 
-  findAll() {
-    this.tableService.getListTable().subscribe(res => {
-      this.lstTable = res;
-    });
-  }
+
 
   processSaveOrUpdate() {
     this.isSubmitted = true;
     if (this.formTable.valid) {
       this.spinner.show();
-
       if (this.action) {
         this.tableService.createTable(this.formTable.value).subscribe(
           data => {
             this.toastr.success('Thêm mới thành công');
             this.close();
           });
-
       }
       else {
         this.tableService.editTable(this.formTable.value, this.table.id).subscribe(data => {
-          this.toastr.success('Cập nhật thành công!');
+          this.toastr.success('Cập nhật thành công !');
           this.close();
         })
       }
-
     }
   }
+
 }

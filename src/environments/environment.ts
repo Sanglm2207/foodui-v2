@@ -10,8 +10,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:2021/api/',
+  apiUrl: 'http://localhost:2022/api/',
   serverUrl: {
-     baseUrl: 'http://localhost:2021/api/',
+     baseUrl: 'http://localhost:2022/api/',
   },
 };

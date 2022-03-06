@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import { routes } from '../../../consts/routes';
 import {AuthService} from './auth.service';
 import {TokenService} from './token.service';
 
@@ -9,8 +8,6 @@ import {TokenService} from './token.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  public routers: typeof routes = routes;
-
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
@@ -27,7 +24,7 @@ export class AuthGuard implements CanActivate {
         return true;
       }
       // not logged in so redirect to login page with the return url
-      this.router.navigate([this.routers.LOGIN], {queryParams: {returnUrl: state.url}});
+      this.router.navigate(['/auth/login'], {queryParams: {returnUrl: state.url}});
       return true;
   }
 

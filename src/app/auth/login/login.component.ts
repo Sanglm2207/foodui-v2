@@ -3,7 +3,6 @@ import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUse
 import {Router} from '@angular/router';
 import {TokenService} from '../../@core/services/_service/auth/token.service';
 import {AuthService} from '../../@core/services/_service/auth/auth.service';
-import {FormProviderRequest} from '../../@core/utils/form-provider-req';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Category } from '../../../@core/utils/category';
+import { Category } from '../../../@core/_config/_models/category.model';
 import { CategoryService } from '../../category/category.service';
 import { FoodService } from '../food.service';
 
@@ -26,7 +26,6 @@ export class ActionFoodComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private translate: TranslateService,
     private foodService: FoodService,
     private categoryService: CategoryService) { }
 

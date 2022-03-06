@@ -8,4 +8,5 @@ export interface User {
   address?: string;
   phoneNumber?: string;
   status?: boolean;
+  avatar?: string;
 }

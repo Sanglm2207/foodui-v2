@@ -6,39 +6,8 @@ import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
-import { UserService } from './mock/users.service';
 import {StickyDirective} from './_config/directives/sticky.driective';
-import {UserData} from './utils/user';
-import {AnalyticsService} from './utils/analytics.service';
-import {LayoutService} from './utils/layout.service';
-import {SeoService} from './utils/seo.service';
-import {StateService} from './utils/state.service';
-import { HttpClientModule } from '@angular/common/http';
 
-const socialLinks = [
-  {
-    url: 'https://github.com/sanglm2207/',
-    target: '_blank',
-    icon: 'github',
-    title: 'github',
-  },
-  {
-    url: 'https://www.facebook.com/sanglm2207/',
-    target: '_blank',
-    icon: 'facebook',
-    title: 'facebook',
-  },
-  {
-    url: 'https://twitter.com/sanglm2207',
-    target: '_blank',
-    icon: 'twitter',
-    title: 'twitter',
-  },
-];
-
-const DATA_SERVICES = [
-  { provide: UserData, useClass: UserService },
-];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
 
@@ -52,7 +21,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...DATA_SERVICES,
   // ...NbAuthModule.forRoot({}).providers,
 
   NbSecurityModule.forRoot({
@@ -72,11 +40,6 @@ export const NB_CORE_PROVIDERS = [
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },
-  AnalyticsService,
-  LayoutService,
-  // PlayerService,
-  SeoService,
-  StateService,
 ];
 
 @NgModule({

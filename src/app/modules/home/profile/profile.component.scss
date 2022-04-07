@@ -1,0 +1,32 @@
+nb-checkbox {
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+  
+  .form-inline > * {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+  
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+ .avatar {
+ 
+    /* make a square container */
+    width: 150px;
+    height: 150px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: top center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+}
+

@@ -1,0 +1,92 @@
+<div class="modal-header">
+    <h4 *ngIf="action" class="modal-title" style="font-size: medium">
+        {{'Thêm mới sản phẩm'}}
+    </h4>
+    <h4 *ngIf="!action" class="modal-title" style="font-size: medium">
+        {{'Sửa sản phẩm ' + product.name}}
+
+    </h4>
+    <button type="button" class="btn shadow-none p-0" aria-label="Close">
+        <span aria-hidden="true" style="font-size: large">x</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formUser">
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="username" class="label">Tên người dùng</label>
+                            <input type="text" nbInput fullWidth id="username" placeholder="Tên người dùng"
+                                formControlName="username">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="password" class="label">Mật khẩu</label>
+                            <input type="password" nbInput fullWidth id="password" placeholder="Mật khẩu"
+                                formControlName="password">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name" class="label">Fullname</label>
+                            <input type="name" nbInput fullWidth id="name" placeholder="Prnameice"
+                                formControlName="name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email" class="label">Email</label>
+                            <input type="text" nbInput fullWidth id="email" placeholder="email"
+                                formControlName="email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="birthday" class="label">Birthday</label>
+                            <input [nbDatepicker]="birthday" nbInput fullWidth id="birthday" placeholder="Birthday"
+                                formControlName="birthday">
+                            <nb-datepicker #birthday></nb-datepicker>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="phoneNumber" class="label">Phone</label>
+                            <input type="text" nbInput fullWidth id="phoneNumber" placeholder="Phone"
+                                formControlName="phoneNumber">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="address" class="label">Address</label>
+                            <textarea nbInput fullWidth id="address" placeholder="Address" formControlName="address"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+     
+
+            </nb-card-body>
+            <nb-card-footer>
+                <div class="row-button">
+                    <button type="button" nbButton status="basic" (click)="close()">Close</button>
+                    <button type="submit" nbButton status="success" (click)="processSaveOrUpdate()">Submit</button>
+                </div>
+
+            </nb-card-footer>
+        </nb-card>
+        
+    </form>
+</div>

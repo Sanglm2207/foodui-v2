@@ -1,29 +1,25 @@
-
 <div class="selector-language">
-  <div class="dropdown">
-    <button class="btn btn-secondary p-0" type="button"
-            id="dropFlag"
-            data-toggle="dropdown"
-            aria-haspopup="true"
+    <!-- <div class="dropdown">
+        <button class="btn btn-secondary p-0" type="button" id="dropFlag" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-      <img class="h-25px w-25px rounded"
-           [src]="currentTheme"
-           alt="language">
-    </button>
-    <div class="dropdown-menu py-0" aria-labelledby="dropFlag">
-      <div class="p-3 cursor-pointer"
-           (click)="changeTheme(lang)"
-           *ngFor="let lang of languages">
-        <img class="h-25px w-25px rounded"
-             [src]="lang.flag"
-             alt="language">
-        <span class="ml-2">{{lang.lang}}</span>
-      </div>
-    </div>
-  </div>
+            <img class="h-25px w-25px rounded" [src]="currentTheme" alt="language">
+        </button>
+        <div class="dropdown-menu py-0" aria-labelledby="dropFlag">
+            <div class="p-3 cursor-pointer" (click)="changeTheme(lang)" *ngFor="let lang of languages">
+                <img class="h-25px w-25px rounded" [src]="lang.flag" alt="language">
+                <span class="ml-2">{{lang.lang}}</span>
+            </div>
+        </div>
+    </div> -->
+
+
+    <span class="form-inline">
+        <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()" [value]="language"
+                [selected]="language === translate.currentLang">
+                {{ language }}
+            </option>
+        </select>
+    </span>
+
 </div>
-
-
-
-
-

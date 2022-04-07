@@ -11,7 +11,4 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:2022/api/',
-  serverUrl: {
-     baseUrl: 'http://localhost:2022/api/',
-  },
 };

@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Tìm kiếm người dùng</nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label">First Name</label>
+                            <input type="text" nbInput fullWidth id="inputFirstName" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Last Name</label>
+                            <input type="text" nbInput fullWidth id="inputLastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputEmail" class="label">Email</label>
+                            <input type="email" nbInput fullWidth id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputWebsite" class="label">Website</label>
+                            <input type="text" nbInput fullWidth id="inputWebsite" placeholder="Website">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <button nbButton  status="primary">Tìm kiếm</button>&emsp;
+                    <button nbButton  status="success">Xoá trắng</button>&emsp;
+                    <button nbButton  status="info" (click)="processCreate()">Thêm mới</button>&emsp;
+                    <button nbButton  status="warning">Nhập</button>&nbsp; 
+                    <button nbButton  status="danger">Xuất</button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Danh sách người dùng</nb-card-header>
+            <nb-card-body>
+                <ngx-datatable [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                    [rows]="users">
+                    <ngx-datatable-column name="Name" [width]="100">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            {{ value }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Email" [width]="100">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                            {{ value }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Birthday" [width]="300">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            {{ value }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,149 +1,35 @@
 {
-
-  "currency": "VND",
-  "quantity": "Số lượng trong kho",
-  "title.quantity.than": "Số lượng lớn hơn số lượng tồn kho",
-  "title.money": "Thành tiền",
-  "title.total": "Tổng số tiền mua hàng",
-  "title.order.count": "Số hóa đơn",
-
-
-  "title.login": "Đăng nhập",
-  "title.or": "HOẶC",
-  "title.and": "và",
-  "title.detail": "Chi tiết",
-  "title.image": "Ảnh",
-  "title.search": "Tìm kiếm",
-  "title.price":"Giá",
-  "title.edit": "Thêm mới",
-  "title.price.required": "Giá không được để trống",
-  "title.maxImage": "tối đa 8 ảnh",
-  "title.quantity":"Số lượng",
-  "title.action": "Hành động",
-  "title.status": "Trạng thái",
-  "title.quantity.required":"Số lượng không được để trống",
-  "title.size":"Kích thước",
-  "title.weight":"Kích thước",
-  "title.store":"Cửa hàng",
-  "title.createdDate":"Ngày tạo",
-  "title.size.required":"Kích thước không được để trống",
-  "title.gallery": "Bộ sưu tập",
-  "title.description": "Mô tả",
-  "title.loading": "Vui lòng chờ...",
-  "title.text.register": "Bằng cách đăng ký, bạn đồng ý",
-  "title.text.register.service": "Điều khoản dịch vụ",
-  "title.text.register.privacy": "Chính sách bảo mật",
-  "title.username": "username",
-  "title.username.required": "username không được để trống",
-  "title.password.name": "Mật khẩu",
-  "title.password.required": "Mật khẩu không được để trống",
-  "title.login.submit": "Đăng nhập",
-  "title.account.dont": "Không có tài khoản?",
-  "title.account.register": "Đăng ký",
-  "title.account.forgot": "Quên mật khẩu?",
-  "title.account.google": "Đăng nhập với google",
-  "title.account.facebook": "Đăng nhập với facebook",
-  "title.account.have": "Bạn đã có tài khoản",
-  "title.account.sign": "Đăng ký để quản lý dự án",
-  "title.account.firstname": "Họ",
-  "title.account.firstname.required": "Họ không được để trống",
-  "title.account.lastname": "Tên",
-  "title.account.lastname.required": "Tên không được để trống",
-  "title.account.username": "Tên người dùng",
-  "title.account.username.required": "Tên người dùng không được để trống",
-  "title.table.index": "TT",
-  "title.table.name": "Tên",
-  "title.table.option": "Tên option",
-  "title.table.size": "Kích thước",
-  "title.table.price": "Giá",
-  "title.table.extraPrice": "Giá thêm(%)",
-  "title.table.description": "Mô tả",
-  "title.table.isCurrent": "Trạng thái",
-  "title.table.createdDate": "Ngày tạo",
-  "sidebar.dashboard": "Bảng điều khiển",
-  "sidebar.users": "Người dùng",
-  "sidebar.tables": "Bàn ăn",
-  "sidebar.foods": "Món ăn",
-  "sidebar.category": "Danh mục món ăn",
-  "sidebar.order": "Đơn đặt hàng",
-  "title.placeholder.uploadFile": "Tải tệp lên",
-
-
-  "exists.name": "Tên đã tồn tại",
-  "exists.option": "Lựa chọn đã tồn tại",
-
-
-  "title.button.browse": "Duyệt....",
-  "title.button.choose": "Lựa chọn",
-  "title.button.save": "Lưu",
-  "title.button.delete": "Xóa",
-  "title.button.cancel": "Hủy",
-  "title.button.submit": "Lưu",
-  "title.button.new": "Thêm mới",
-  "title.button.edit": "Sửa",
-  "title.button.search": "Tìm kiếm",
-  "title.button.detail": "Chi tiết",
-
-
-
-  "title.product.listProduct": "Danh sách các sản phẩm",
-  "title.product.addNew": "Thêm mới sản phẩm",
-  "title.product.name": "Tên sản phẩm",
-  "title.product.name.required": "Tên sản phẩm không được để trống",
-  "title.product.category": "Loại sản phẩm",
-  "title.product.add": "Thêm sản phẩm",
-
-  "title.user.listUser": "Danh sách người dùng",
-  "title.user.addNew": "Thêm mới người dùng",
-  "title.user.add": "Thêm người dùng",
-
-  "title.table.listTable": "Danh sách bàn ăn",
-  "title.table.addNew": "Thêm mới một bàn ăn",
-  "title.table.add": "Thêm bàn ăn",
-
-  "title.food.listFood": "Danh sách món ăn",
-  "title.food.addNew": "Thêm một món ăn mới",
-  "title.food.add": "Thêm món ăn",
-
-  "title.category.listCategories": "Danh mục các món ăn",
-  "title.category.addCategory": "Thêm mới một danh mục",
-  "title.category.add": "Thêm danh mục",
-
-  "title.order.listOrders": "Danh sách đơn hàng",
-
-
-  
-
-  "title.options.ice.list": "Danh sách chọn nước đá",
-  "title.options.ice.add": "Thêm mới nước đá",
-  "title.options.ice.edit": "Chỉnh sửa nước đá",
-  "title.options.size.list": "Danh sách tùy chọn kích thước",
-  "title.options.size.add": "Thêm mới kích thước",
-  "title.options.size.edit": "Chỉnh sửa kích thước",
-  "title.options.size.name": "Tên kích thước",
-  "title.options.size.extraPrice": "Giá thêm(%)",
-  "title.size.name.required": "Kích thước không được để trống",
-  "title.options.topping.list": "Danh sách topping",
-  "title.options.topping.add": "Thêm mới topping",
-  "title.options.topping.edit": "Chỉnh sửa topping",
-  "title.topping.name.required": "Tên topping không được",
-  "title.topping.name": "Tên topping",
-
-
-
-  "title.category.listCategory": "Danh sách loại sản phẩm",
-  "title.category.label": "Loại sản phẩm",
-  "title.category.name": "Tên loại sản phẩm",
-  "title.category.name.required": "Tên loại sản phẩm không được để trống",
-  "title.category.addTitle": "Thêm mới loại sản phẩm",
-  "title.category.editTitle": "Chỉnh sửa loại sản phẩm",
-
-
-  "message.add.success": "Thêm mới thành công",
-  "message.delete": "Xác nhận xóa?",
-  "message.delete.notify": "Thông báo xóa",
-  "message.delete.success": "Xóa thành công",
-  "record.deleted": "Bản ghi đã bị xóa",
-  "message.noRecords": "Không tồn tại bản ghi"
-
+    "sidebar": {
+        "dashboard": "Bảng điều khiển",
+        "user": "Người dùng",
+        "product": "Sản phẩm",
+        "features": "Các chức năng",
+        "product_list" : "Danh sách sản phẩm",
+        "add_category" : "Tạo mới danh mục sản phẩm"
+    },
+    "label.hello": "Xin chào",
+    "label.title": "Tiêu đề",
+    "label.content": "Nội dung",
+    "common": {
+        "search": "Tìm kiếm"
+    },
+    "course": {
+        "search_info": "Thông tim tìm kiếm",
+        "search_placeholder": "Nhập để tìm kiếm theo tên thư mục, tên khóa học ..",
+        "search_display_by_folder": "Hiển thị theo thư mục",
+        "search_mark": "Điểm",
+        "search_sort_by_revenue": "Sắp xếp theo doanh thu tăng dần",
+        "folder": "Thư mục",
+        "back_previous_folder": "Về thư mục trước",
+        "create_folder": "Tạo thư mục",
+        "delete_folder": "Xóa thư mục",
+        "edit_folder": "Sửa thư mục",
+        "no_folder_found": "Hiện không có thư mục nào !",
+        "no_course_found": "Hiện không có khóa học nào !",
+        "course": "Khóa học",
+        "create_course": "Tạo khóa học",
+        "register": "Đăng ký",
+        "revenue": "Doanh thu",
+        "turn": "lượt"
+    }
 }

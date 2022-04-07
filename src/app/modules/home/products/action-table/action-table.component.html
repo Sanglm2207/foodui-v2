@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <h4 *ngIf="action" class="modal-title" style="font-size: medium">
+        {{'Thêm mới sản phẩm'}}
+    </h4>
+    <h4 *ngIf="!action" class="modal-title" style="font-size: medium">
+        {{'Sửa sản phẩm ' + product.name}}
+
+    </h4>
+    <button type="button" class="btn shadow-none p-0" aria-label="Close">
+        <span aria-hidden="true" style="font-size: large">x</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formProduct">
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name" class="label">Tên sản phẩm</label>
+                            <input type="text" nbInput fullWidth id="name" placeholder="Product name"
+                                formControlName="name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="description" class="label">Mô tả</label>
+                            <input type="text" nbInput fullWidth id="description" placeholder="Description"
+                                formControlName="description">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="price" class="label">Price</label>
+                            <input type="number" nbInput fullWidth id="price" placeholder="Price"
+                                formControlName="price">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="quantity" class="label">Quantity</label>
+                            <input type="text" nbInput fullWidth id="quantity" placeholder="Quantity"
+                                formControlName="quantity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="price" class="label">Danh mục</label><br>
+                            <!-- <nb-select placeholder="Multiple Select" formControlName="category_id">
+                                <nb-option *ngFor="let item of lstCategories" [value]="item.id">
+                                    {{ item.name}}
+                                </nb-option>
+                            </nb-select> -->
+
+                            <app-select 
+                                [data]="lstCategories"
+                            ></app-select>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </nb-card-body>
+            <nb-card-footer>
+                <div class="row-button">
+                    <button type="button" nbButton status="basic" (click)="close()">Close</button>
+                    <button type="submit" nbButton status="success" (click)="processSaveOrUpdate()">Submit</button>
+                </div>
+
+            </nb-card-footer>
+        </nb-card>
+        
+    </form>
+</div>

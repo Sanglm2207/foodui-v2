@@ -39,7 +39,7 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { SelectorLanguageComponent } from './components/selector-language/selector-language.component';
-import {TranslateModule} from '@ngx-translate/core';
+import { PrimengModule } from '../shared/primeng.module';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -73,13 +73,10 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ...NB_MODULES,
-    TranslateModule.forRoot(),
-  ],
+  imports: [CommonModule, ...NB_MODULES],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
-  declarations: [...COMPONENTS, ...PIPES, SelectorLanguageComponent],
+  declarations: [...COMPONENTS, ...PIPES,  SelectorLanguageComponent
+  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {

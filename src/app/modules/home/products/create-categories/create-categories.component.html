@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-6">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Thêm mới danh mục sản phẩm</nb-card-header>
+            <nb-card-body>
+                <form  [formGroup]="formCategory" (ngSubmit)="processSaveCategories()">
+                    <div class="form-inline">
+                        <input type="text" nbInput fullWidth placeholder="Tên danh mục" formControlName="name">
+                        <textarea nbInput fullWidth placeholder="Mô tả" formControlName="description" ></textarea>
+                    </div>
+                    <div class="form-inline">
+                        <button type="submit" nbButton status="primary">Thêm mới</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-md-6">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Thêm mới thương hiệu xuất sứ</nb-card-header>
+            <nb-card-body>
+                <form  [formGroup]="formBrand" (ngSubmit)="processSaveBrand()">
+                    <div class="form-inline">
+                        <input type="text" nbInput fullWidth placeholder="Tên thương hiệu" formControlName="name">
+                        <textarea nbInput fullWidth placeholder="Mô tả" formControlName="description" ></textarea>
+                    </div>
+                   
+                    <div class="form-inline">
+                        <button type="submit" nbButton status="primary">Thêm mới</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

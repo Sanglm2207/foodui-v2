@@ -13,5 +13,3 @@ interface NodeModule {
 declare var tinymce: any;
 
 declare var echarts: any;
-declare var KTPortlet: any;
-declare var KTDialog: any;

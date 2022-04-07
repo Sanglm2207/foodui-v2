@@ -5,22 +5,15 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app.routing';
 import {
-  NbActionsModule,
-  NbButtonModule,
-  NbCardModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbRadioModule,
-  NbSelectModule,
-  NbListModule,
-  NbIconModule,
+  NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
@@ -28,13 +21,11 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import { SharesModule } from './shares/shares.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { AuthInterceptor } from './@core/interceptor/auth.interceptor';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { AuthInterceptor } from './@core/intercepters/auth.interceptor';
+
 
 const configToast: any = {
   timeOut: 3000,
@@ -50,7 +41,6 @@ export function httpTranslateLoader(http: HttpClient) {
 }
 
 
-// @ts-ignore
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -64,18 +54,19 @@ export function httpTranslateLoader(http: HttpClient) {
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+    }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    SharesModule,
-    NgbModule,
     ToastrModule.forRoot(configToast),
-    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpTranslateLoader,
         deps: [HttpClient],
       },
+
     }),
   ],
   bootstrap: [AppComponent],
@@ -89,5 +80,3 @@ export function httpTranslateLoader(http: HttpClient) {
 })
 export class AppModule {
 }
-
-

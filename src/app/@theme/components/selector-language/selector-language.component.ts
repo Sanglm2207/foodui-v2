@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {LanguageService} from '../../../@core/services/_service/language.service';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 interface LanguageFlag {
   lang: string;
@@ -9,12 +9,13 @@ interface LanguageFlag {
 }
 
 @Component({
-  selector: 'ngx-selector-language',
+  selector: 'selector-language',
   templateUrl: './selector-language.component.html',
-  styleUrls: ['./selector-language.component.scss'],
+  styleUrls: ['./selector-language.component.scss']
 })
 export class SelectorLanguageComponent implements OnInit {
-  currentTheme: string;
+
+  // currentTheme: string;
 
   language: LanguageFlag;
   languages: LanguageFlag[] = [
@@ -30,34 +31,15 @@ export class SelectorLanguageComponent implements OnInit {
     },
   ];
 
-  constructor(
-    private languageService: LanguageService,
-  ) {
+  constructor(public translate: TranslateService) {
+    translate.addLangs(['en', 'vi']);
+    translate.setDefaultLang('vi');
   }
 
   ngOnInit(): void {
-    this.setLanguage();
   }
 
-  setLanguage() {
-    const lang = sessionStorage.getItem('lang');
-    if (lang) {
-      this.languages.forEach((language: LanguageFlag) => {
-        if (language.lang === lang) {
-          this.currentTheme = language.flag;
-        }
-      });
-    } else {
-      this.currentTheme = './assets/media/svg/flags/220-vietnam.svg';
-      this.changeTheme('vi');
-    }
-
+  switchLang(lang: string) {
+    this.translate.use(lang);
   }
-
-  changeTheme(lang: any) {
-    this.currentTheme = lang.flag;
-    this.languageService.setLang(lang.lang);
-    window.location.reload();
-  }
-
 }

@@ -3,18 +3,22 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">M-Food</a>
+    <a class="logo" href="#" (click)="navigateHome()">Foodie</a>
   </div>
-  
+  <!-- <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
+    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
+  </nb-select> -->
 </div>
 
 <div class="header-container">
   <nb-actions size="small">
     <nb-action>
-      <ngx-selector-language></ngx-selector-language>
+      <selector-language></selector-language>
     </nb-action>
-    <nb-action class="user-action">
-      <nb-user [nbContextMenu]="userMenu" [name]="user?.name" [picture]="user?.avatar"></nb-user>
+    <nb-action *nbIsGranted="['view', 'user']">
+      <nb-user [nbContextMenu]="userMenu" [onlyPicture]="userPictureOnly"
+        [name]="'Xin chào' + ' ' + user?.name" [picture]="user?.avatar">
+      </nb-user>
     </nb-action>
   </nb-actions>
 </div>

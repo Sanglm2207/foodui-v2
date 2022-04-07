@@ -1,19 +1,40 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NbAuthModule} from '@nebular/auth';
+import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import {
+  AnalyticsService,
+  LayoutService,
+  PlayerService,
+  SeoService,
+  StateService,
+} from './utils';
 
-import {StickyDirective} from './_config/directives/sticky.driective';
+
+const socialLinks = [
+  {
+    url: 'https://github.com/akveo/nebular',
+    target: '_blank',
+    icon: 'github',
+  },
+  {
+    url: 'https://www.facebook.com/akveo/',
+    target: '_blank',
+    icon: 'facebook',
+  },
+  {
+    url: 'https://twitter.com/akveo_inc',
+    target: '_blank',
+    icon: 'twitter',
+  },
+];
+
 
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
-
-  // private readonly baseUrl = environment.apiUrl;
-
-
   getRole() {
     // here you could provide any role based on any auth flow
     return observableOf('guest');
@@ -21,7 +42,23 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  // ...NbAuthModule.forRoot({}).providers,
+  ...NbAuthModule.forRoot({
+
+    strategies: [
+      NbDummyAuthStrategy.setup({
+        name: 'email',
+        delay: 3000,
+      }),
+    ],
+    forms: {
+      login: {
+        socialLinks: socialLinks,
+      },
+      register: {
+        socialLinks: socialLinks,
+      },
+    },
+  }).providers,
 
   NbSecurityModule.forRoot({
     accessControl: {
@@ -40,6 +77,11 @@ export const NB_CORE_PROVIDERS = [
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },
+  AnalyticsService,
+  LayoutService,
+  PlayerService,
+  SeoService,
+  StateService,
 ];
 
 @NgModule({
@@ -48,9 +90,8 @@ export const NB_CORE_PROVIDERS = [
   ],
   exports: [
     NbAuthModule,
-    StickyDirective,
   ],
-  declarations: [StickyDirective],
+  declarations: [],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

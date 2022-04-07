@@ -1,8 +1,8 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {of as observableOf, Observable, BehaviorSubject} from 'rxjs';
-import {takeWhile} from 'rxjs/operators';
+import { Injectable, OnDestroy } from '@angular/core';
+import { of as observableOf,  Observable,  BehaviorSubject } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
-import {NbLayoutDirectionService, NbLayoutDirection} from '@nebular/theme';
+import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
 
 @Injectable()
 export class StateService implements OnDestroy {
@@ -10,32 +10,32 @@ export class StateService implements OnDestroy {
   protected layouts: any = [
     {
       name: 'One Column',
-      icon: 'nblayoutdefault',
-      id: 'onecolumn',
+      icon: 'nb-layout-default',
+      id: 'one-column',
       selected: true,
     },
     {
       name: 'Two Column',
-      icon: 'nblayouttwocolumn',
-      id: 'twocolumn',
+      icon: 'nb-layout-two-column',
+      id: 'two-column',
     },
     {
       name: 'Center Column',
-      icon: 'nblayoutcentre',
-      id: 'centercolumn',
+      icon: 'nb-layout-centre',
+      id: 'center-column',
     },
   ];
 
   protected sidebars: any = [
     {
       name: 'Sidebar at layout start',
-      icon: 'nblayoutsidebarleft',
+      icon: 'nb-layout-sidebar-left',
       id: 'start',
       selected: true,
     },
     {
       name: 'Sidebar at layout end',
-      icon: 'nblayoutsidebarright',
+      icon: 'nb-layout-sidebar-right',
       id: 'end',
     },
   ];
@@ -49,6 +49,7 @@ export class StateService implements OnDestroy {
     directionService.onDirectionChange()
       .pipe(takeWhile(() => this.alive))
       .subscribe(direction => this.updateSidebarIcons(direction));
+
     this.updateSidebarIcons(directionService.getDirection());
   }
 
@@ -57,10 +58,10 @@ export class StateService implements OnDestroy {
   }
 
   private updateSidebarIcons(direction: NbLayoutDirection) {
-    const [startSidebar, endSidebar] = this.sidebars;
+    const [ startSidebar, endSidebar ] = this.sidebars;
     const isLtr = direction === NbLayoutDirection.LTR;
-    const startIconClass = isLtr ? 'nblayoutsidebarleft' : 'nblayoutsidebarright';
-    const endIconClass = isLtr ? 'nblayoutsidebarright' : 'nblayoutsidebarleft';
+    const startIconClass = isLtr ? 'nb-layout-sidebar-left' : 'nb-layout-sidebar-right';
+    const endIconClass = isLtr ? 'nb-layout-sidebar-right' : 'nb-layout-sidebar-left';
     startSidebar.icon = startIconClass;
     endSidebar.icon = endIconClass;
   }

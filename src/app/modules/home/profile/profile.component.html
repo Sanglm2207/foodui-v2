@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card class="inline-form-card">
+            <nb-card-body style="text-align: center;">
+                <img class="avatar" src="{{user.avatar}}">
+                    <h2>
+                        {{user.name}} 
+                        <span class="actived_avatar"> 
+                            <nb-icon icon="checkmark-circle-2-outline" status="success" nbTooltip="Đã xác minh" nbTooltipStatus="primary"></nb-icon>
+                        </span>
+                    </h2>
+                   
+                <p *ngIf="user.is_admin === true">Quản lý</p>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <nb-card>
+            <nb-card-header>Thông tin cá nhân</nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="form-group row">
+                        <label class="label col-sm-3 col-form-label">Họ và Tên</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth  placeholder="{{user.name}}" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth placeholder="{{user.birthday}}" [nbDatepicker]="birthday">
+                            <nb-datepicker #birthday></nb-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label">Số điện thoại</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth placeholder="{{user.phoneNumber}}" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth placeholder="{{user.email}}" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth placeholder="{{user.address}}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <button nbButton>Lưu thông tin</button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+    <div class="col-md-6">
+        <nb-card>
+            <nb-card-header>Cài đặt nâng cao</nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="form-group row">
+                        <label class="label col-sm-3 col-form-label">Cập nhật thông tin</label>
+                        <div class="col-sm-9">
+                           
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label  class="label col-sm-3 col-form-label">Xoá tài khoản</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth placeholder="Ngày sinh" disabled>
+                        </div>
+                    </div>
+                   
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
